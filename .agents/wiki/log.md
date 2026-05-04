@@ -1,9 +1,18 @@
 # Wiki Log
 
 **Summary**: Append-only record of all wiki operations.
-**Last updated**: 2026-05-03
+**Last updated**: 2026-05-04
 
 ---
+
+## 2026-05-04
+
+- **Updated**: `.agents/rules/testing.md` — co-located test-code structure, `/test` for requirement cases, pre-commit test checks
+- **Updated**: `.agents/skills/test-gen/SKILL.md` — reflect co-located test structure and pre-commit check step
+- **Moved**: test files to co-located locations (`server/src/modules/auth/auth.controller.test.ts`, `server/src/shared/middleware/auth.middleware.test.ts`)
+- **Added**: Jest + ts-jest to server (`npm install --save-dev jest @types/jest ts-jest`)
+- **Added**: `test` script to `server/package.json` and created `server/jest.config.js`
+- **Ran**: context-sync — updated `.agents/context/file-tree.md`, `dependencies.md`, `symbols.md` (64 files)
 
 ## 2026-05-03
 

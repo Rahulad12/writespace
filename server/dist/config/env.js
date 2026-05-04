@@ -14,4 +14,5 @@ exports.env = {
     dbPassword: process.env.DB_PASSWORD,
     dbPort: process.env.DB_PORT,
     jwtSecret: process.env.JWT_SECRET,
+    jwtExpiresIn: process.env.JWT_EXPIRES_IN || "7d",
 };

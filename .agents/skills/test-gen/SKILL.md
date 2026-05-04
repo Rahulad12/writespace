@@ -19,10 +19,12 @@ Read the full source file. Identify:
 Read `.agents/rules/testing.md` and identify the correct mocking strategy for this file type.
 
 ## Step3 — Determine test file path
-- Source: `src/modules/users/services/users.service.ts`
-- Test:   `src/modules/users/services/users.service.test.ts`
-- Source: `src/shared/utils/format-date.ts`
-- Test:   `src/shared/utils/format-date.test.ts`
+- **Automated test-code** is co-located with source files in their module directories
+- Pattern: For source `<package>/src/<path>/<file>.ts`, test is `<package>/src/<path>/<file>.test.ts`
+- Example: `server/src/modules/auth/auth.controller.ts` → `server/src/modules/auth/auth.controller.test.ts`
+- Example: `server/src/shared/middleware/auth.middleware.ts` → `server/src/shared/middleware/auth.middleware.test.ts`
+- Example: `client/src/shared/utils/format.ts` → `client/src/shared/utils/format.test.ts`
+- **Requirement-based test cases** go in `/test/<package>/<module-path>/` (not co-located)
 
 ## Step4 — Generate test file
 Generate with:
@@ -34,5 +36,8 @@ Generate with:
 - All test variables explicitly typed — no implicit `any` in test files.
 
 ## Step5 — Write file and report
-Write the generated test file. Report the path and list all generated test cases.
+Write the generated test file (co-located with source). Report the path and list all generated test cases.
 Remind the agent to complete the test bodies — stubs are marked with `// TODO`.
+
+## Step6 — Pre-commit check
+Ensure all tests pass by running `cd <package> && npm run test` before any commit or push to GitHub.

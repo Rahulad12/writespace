@@ -28,6 +28,17 @@ Then read:
 
 ---
 
+## Post-Task / End of Session — Mandatory Steps
+
+After completing any task or ending a session, the agent MUST complete these steps in order:
+1. Run `/context-sync` to refresh `.agents/context/` (file-tree, dependencies, symbols)
+2. Update `.agents/wiki/log.md` with all completed work (follow existing date-based append-only format)
+3. Update `.agents/sessions/current.md` to mark completed tasks as done (tick off all completed checklist items)
+4. Run `cd <package> && npm run test` to ensure all co-located tests pass (per `.agents/rules/testing.md`)
+5. If committing, ensure all checks pass, then commit only to feature branches (never `main`)
+
+---
+
 ## Critical Rules — NEVER Break
 
 1. Follow the exact folder and file structure for client/ and server/ — see `.agents/rules/module-structure.md`

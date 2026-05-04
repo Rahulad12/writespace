@@ -12,7 +12,16 @@ paths:
 > Run `/test-gen <source-file>` to generate test stubs — do not write test files from scratch.
 
 ## Structure
-- Co-locate tests with source files inside the module folder
+- **Automated test-code** (`.test.ts`, `.test.tsx`, `.spec.ts` files) are co-located with source files in their respective module/package directories
+  - Pattern: For source file `<package>/src/<path>/<file>.ts`, test file is `<package>/src/<path>/<file>.test.ts`
+  - Example: `server/src/modules/auth/auth.controller.ts` → `server/src/modules/auth/auth.controller.test.ts`
+  - Example: `client/src/shared/utils/format.ts` → `client/src/shared/utils/format.test.ts`
+  - Example: `server/src/shared/middleware/auth.middleware.ts` → `server/src/shared/middleware/auth.middleware.test.ts`
+- **Requirement-based test cases** are stored in the top-level `/test` directory, organized per module:
+  - Pattern: `/test/<package>/<module-path>/` (mirror the source module structure)
+  - Example: `test/server/modules/auth/` for auth module server-side test cases
+  - Example: `test/client/components/button/` for button component client-side test cases
+- All automated tests must pass (run `cd <package> && npm run test`) before any commit or push to GitHub
 - One describe block per component, function, or class
 - Test names: "should [behaviour] when [condition]"
 
