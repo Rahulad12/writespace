@@ -7,3 +7,12 @@ export interface EnvTypes {
   dbPort: string;
   jwtSecret: string;
 }
+
+export interface GithubSettings {
+  url: string;
+  token?: string;
+}
+
+export interface AppSettings {
+  github: GithubSettings;
+}

@@ -1,0 +1,6 @@
+name: issues
+version: "1.0"
+description: Read raw requirements and break them into structured, actionable issues
+entry: .agents/skills/issues/SKILL.md
+argument-hint: "<path-to-requirements-file | raw text>"
+allowed-tools: [Bash, Read, Write, Edit, Task]

@@ -1,0 +1,1026 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "hyperedges": [
+      {
+        "id": "auth_module_components",
+        "label": "Authentication Module Components",
+        "nodes": [
+          "auth_controller_ts_auth_controller",
+          "auth_routes_ts_auth_routes",
+          "auth_types_ts_auth_types",
+          "auth_validation_schema_ts_auth_validation"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "server/src/modules/auth"
+      },
+      {
+        "id": "database_schema_tables",
+        "label": "Database Schema Tables",
+        "nodes": [
+          "users_table_sql_users_table",
+          "posts_table_sql_posts_table",
+          "comments_table_sql_comments_table",
+          "likes_table_sql_likes_table"
+        ],
+        "relation": "form",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "server/src/shared/database-table"
+      },
+      {
+        "id": "post_module_scaffolds",
+        "label": "Post Module Scaffolds",
+        "nodes": [
+          "post_types_ts_post_types",
+          "psot_controller_ts_post_controller",
+          "post_routes_ts_post_routes"
+        ],
+        "relation": "participate_in",
+        "confidence": "INFERRED",
+        "confidence_score": 0.9,
+        "source_file": "server/src/modules/post"
+      },
+      {
+        "id": "comment_module_scaffolds",
+        "label": "Comment Module Scaffolds",
+        "nodes": [
+          "comment_controller_ts_comment_controller",
+          "comment_routes_ts_comment_routes",
+          "comment_types_ts_comment_types"
+        ],
+        "relation": "participate_in",
+        "confidence": "INFERRED",
+        "confidence_score": 0.9,
+        "source_file": "server/src/modules/comment"
+      },
+      {
+        "id": "server_startup_chain",
+        "label": "Server Startup Chain",
+        "nodes": [
+          "index_ts_server_entry",
+          "app_ts_express_app",
+          "db_ts_database_pool",
+          "env_ts_env_config"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "server/src"
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "label": "index.ts",
+      "file_type": "code",
+      "source_file": "index.ts",
+      "source_location": "L1",
+      "id": "index_ts",
+      "community": 6,
+      "norm_label": "index.ts"
+    },
+    {
+      "label": "app.ts",
+      "file_type": "code",
+      "source_file": "app.ts",
+      "source_location": "L1",
+      "id": "app_ts",
+      "community": 7,
+      "norm_label": "app.ts"
+    },
+    {
+      "label": "post.types.ts",
+      "file_type": "code",
+      "source_file": "shared/middleware/auth.middleware.ts",
+      "source_location": "L1",
+      "id": "modules_post_post_types_ts",
+      "community": 8,
+      "norm_label": "post.types.ts"
+    },
+    {
+      "label": "auth.types.ts",
+      "file_type": "code",
+      "source_file": "modules/auth/auth.types.ts",
+      "source_location": "L1",
+      "id": "modules_auth_auth_types_ts",
+      "community": 9,
+      "norm_label": "auth.types.ts"
+    },
+    {
+      "label": "auth.validation.schema.ts",
+      "file_type": "code",
+      "source_file": "modules/auth/auth.validation.schema.ts",
+      "source_location": "L1",
+      "id": "modules_auth_auth_validation_schema_ts",
+      "community": 10,
+      "norm_label": "auth.validation.schema.ts"
+    },
+    {
+      "label": "auth.routes.ts",
+      "file_type": "code",
+      "source_file": "modules/auth/auth.routes.ts",
+      "source_location": "L1",
+      "id": "modules_auth_auth_routes_ts",
+      "community": 11,
+      "norm_label": "auth.routes.ts"
+    },
+    {
+      "label": "auth.controller.ts",
+      "file_type": "code",
+      "source_file": "modules/auth/auth.controller.ts",
+      "source_location": "L1",
+      "id": "modules_auth_auth_controller_ts",
+      "community": 4,
+      "norm_label": "auth.controller.ts"
+    },
+    {
+      "label": "register()",
+      "file_type": "code",
+      "source_file": "modules/auth/auth.controller.ts",
+      "source_location": "L6",
+      "id": "auth_auth_controller_register",
+      "community": 4,
+      "norm_label": "register()"
+    },
+    {
+      "label": "login()",
+      "file_type": "code",
+      "source_file": "modules/auth/auth.controller.ts",
+      "source_location": "L31",
+      "id": "auth_auth_controller_login",
+      "community": 4,
+      "norm_label": "login()"
+    },
+    {
+      "label": "env.types.ts",
+      "file_type": "code",
+      "source_file": "shared/types/env.types.ts",
+      "source_location": "L1",
+      "id": "shared_types_env_types_ts",
+      "community": 12,
+      "norm_label": "env.types.ts"
+    },
+    {
+      "label": "db.ts",
+      "file_type": "code",
+      "source_file": "config/db.ts",
+      "source_location": "L1",
+      "id": "config_db_ts",
+      "community": 13,
+      "norm_label": "db.ts"
+    },
+    {
+      "label": "env.ts",
+      "file_type": "code",
+      "source_file": "config/env.ts",
+      "source_location": "L1",
+      "id": "config_env_ts",
+      "community": 14,
+      "norm_label": "env.ts"
+    },
+    {
+      "label": "Server Entry Point",
+      "file_type": "code",
+      "source_file": "server/src/index.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_ts_server_entry",
+      "community": 2,
+      "norm_label": "server entry point"
+    },
+    {
+      "label": "Express Application Setup",
+      "file_type": "code",
+      "source_file": "server/src/app.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "app_ts_express_app",
+      "community": 2,
+      "norm_label": "express application setup"
+    },
+    {
+      "label": "Auth Controller",
+      "file_type": "code",
+      "source_file": "server/src/modules/auth/auth.controller.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "auth_controller_ts_auth_controller",
+      "community": 1,
+      "norm_label": "auth controller"
+    },
+    {
+      "label": "Auth Routes",
+      "file_type": "code",
+      "source_file": "server/src/modules/auth/auth.routes.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "auth_routes_ts_auth_routes",
+      "community": 1,
+      "norm_label": "auth routes"
+    },
+    {
+      "label": "Auth Type Definitions",
+      "file_type": "code",
+      "source_file": "server/src/modules/auth/auth.types.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "auth_types_ts_auth_types",
+      "community": 1,
+      "norm_label": "auth type definitions"
+    },
+    {
+      "label": "Auth Validation Schemas",
+      "file_type": "code",
+      "source_file": "server/src/modules/auth/auth.validation.schema.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "auth_validation_schema_ts_auth_validation",
+      "community": 1,
+      "norm_label": "auth validation schemas"
+    },
+    {
+      "label": "Comment Controller",
+      "file_type": "code",
+      "source_file": "server/src/modules/comment/comment.controller.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "comment_controller_ts_comment_controller",
+      "community": 0,
+      "norm_label": "comment controller"
+    },
+    {
+      "label": "Comment Routes",
+      "file_type": "code",
+      "source_file": "server/src/modules/comment/comment.routes.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "comment_routes_ts_comment_routes",
+      "community": 0,
+      "norm_label": "comment routes"
+    },
+    {
+      "label": "Comment Type Definitions",
+      "file_type": "code",
+      "source_file": "server/src/modules/comment/comment.types.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "comment_types_ts_comment_types",
+      "community": 0,
+      "norm_label": "comment type definitions"
+    },
+    {
+      "label": "Post Type Definitions",
+      "file_type": "code",
+      "source_file": "server/src/modules/post/post.types.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "post_types_ts_post_types",
+      "community": 0,
+      "norm_label": "post type definitions"
+    },
+    {
+      "label": "Post Controller",
+      "file_type": "code",
+      "source_file": "server/src/modules/post/psot.controller.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "psot_controller_ts_post_controller",
+      "community": 0,
+      "norm_label": "post controller"
+    },
+    {
+      "label": "Post Routes",
+      "file_type": "code",
+      "source_file": "server/src/modules/post/post.routes.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "post_routes_ts_post_routes",
+      "community": 0,
+      "norm_label": "post routes"
+    },
+    {
+      "label": "Database Pool Configuration",
+      "file_type": "code",
+      "source_file": "server/src/config/db.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "db_ts_database_pool",
+      "community": 2,
+      "norm_label": "database pool configuration"
+    },
+    {
+      "label": "Environment Configuration",
+      "file_type": "code",
+      "source_file": "server/src/config/env.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "env_ts_env_config",
+      "community": 2,
+      "norm_label": "environment configuration"
+    },
+    {
+      "label": "Environment Variable Types",
+      "file_type": "code",
+      "source_file": "server/src/shared/types/env.types.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "env_types_ts_env_types",
+      "community": 2,
+      "norm_label": "environment variable types"
+    },
+    {
+      "label": "Auth Middleware",
+      "file_type": "code",
+      "source_file": "server/src/shared/middleware/auth.middleware.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "auth_middleware_ts_auth_middleware",
+      "community": 1,
+      "norm_label": "auth middleware"
+    },
+    {
+      "label": "Validator Middleware",
+      "file_type": "code",
+      "source_file": "server/src/shared/middleware/validator.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "validator_ts_validator_middleware",
+      "community": 1,
+      "norm_label": "validator middleware"
+    },
+    {
+      "label": "Users Database Table",
+      "file_type": "code",
+      "source_file": "server/src/shared/database-table/users-table.sql",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "users_table_sql_users_table",
+      "community": 0,
+      "norm_label": "users database table"
+    },
+    {
+      "label": "Posts Database Table",
+      "file_type": "code",
+      "source_file": "server/src/shared/database-table/posts-table.sql",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "posts_table_sql_posts_table",
+      "community": 0,
+      "norm_label": "posts database table"
+    },
+    {
+      "label": "Comments Database Table",
+      "file_type": "code",
+      "source_file": "server/src/shared/database-table/comments-table.sql",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "comments_table_sql_comments_table",
+      "community": 0,
+      "norm_label": "comments database table"
+    },
+    {
+      "label": "Likes Database Table",
+      "file_type": "code",
+      "source_file": "server/src/shared/database-table/likes-table.sql",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "likes_table_sql_likes_table",
+      "community": 0,
+      "norm_label": "likes database table"
+    },
+    {
+      "label": "Agent Instructions Document",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "agents_md_project_rules",
+      "community": 15,
+      "norm_label": "agent instructions document"
+    },
+    {
+      "label": "register Handler Function",
+      "file_type": "code",
+      "source_file": "server/src/modules/auth/auth.controller.ts",
+      "source_location": "6",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "auth_controller_ts_register_handler",
+      "community": 5,
+      "norm_label": "register handler function"
+    },
+    {
+      "label": "login Handler Function",
+      "file_type": "code",
+      "source_file": "server/src/modules/auth/auth.controller.ts",
+      "source_location": "31",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "auth_controller_ts_login_handler",
+      "community": 3,
+      "norm_label": "login handler function"
+    },
+    {
+      "label": "RegisterBody Type",
+      "file_type": "code",
+      "source_file": "server/src/modules/auth/auth.types.ts",
+      "source_location": "4",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "auth_types_ts_register_body",
+      "community": 5,
+      "norm_label": "registerbody type"
+    },
+    {
+      "label": "LoginBody Type",
+      "file_type": "code",
+      "source_file": "server/src/modules/auth/auth.types.ts",
+      "source_location": "5",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "auth_types_ts_login_body",
+      "community": 3,
+      "norm_label": "loginbody type"
+    },
+    {
+      "label": "UserRow Interface",
+      "file_type": "code",
+      "source_file": "server/src/modules/auth/auth.types.ts",
+      "source_location": "7",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "auth_types_ts_user_row",
+      "community": 3,
+      "norm_label": "userrow interface"
+    },
+    {
+      "label": "registerSchema Zod Schema",
+      "file_type": "code",
+      "source_file": "server/src/modules/auth/auth.validation.schema.ts",
+      "source_location": "3",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "auth_validation_schema_ts_register_schema",
+      "community": 5,
+      "norm_label": "registerschema zod schema"
+    },
+    {
+      "label": "loginSchema Zod Schema",
+      "file_type": "code",
+      "source_file": "server/src/modules/auth/auth.validation.schema.ts",
+      "source_location": "9",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "auth_validation_schema_ts_login_schema",
+      "community": 3,
+      "norm_label": "loginschema zod schema"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "modules/auth/auth.controller.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "modules_auth_auth_controller_ts",
+      "target": "auth_auth_controller_register",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "modules/auth/auth.controller.ts",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "modules_auth_auth_controller_ts",
+      "target": "auth_auth_controller_login",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/index.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "index_ts_server_entry",
+      "target": "app_ts_express_app"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/index.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "index_ts_server_entry",
+      "target": "env_ts_env_config"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/app.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "app_ts_express_app",
+      "target": "db_ts_database_pool"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/app.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "app_ts_express_app",
+      "target": "auth_routes_ts_auth_routes"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/app.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "app_ts_express_app",
+      "target": "env_ts_env_config"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.4,
+      "source_file": "server/src/app.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "app_ts_express_app",
+      "target": "comment_routes_ts_comment_routes"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.4,
+      "source_file": "server/src/app.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "app_ts_express_app",
+      "target": "post_routes_ts_post_routes"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/modules/auth/auth.routes.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "auth_routes_ts_auth_routes",
+      "target": "auth_controller_ts_auth_controller"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/modules/auth/auth.controller.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "auth_controller_ts_auth_controller",
+      "target": "auth_types_ts_auth_types"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/modules/auth/auth.controller.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "auth_controller_ts_auth_controller",
+      "target": "db_ts_database_pool"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/modules/auth/auth.controller.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "auth_controller_ts_auth_controller",
+      "target": "users_table_sql_users_table"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "server/src/shared/middleware/auth.middleware.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "auth_middleware_ts_auth_middleware",
+      "target": "auth_controller_ts_auth_controller"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/modules/auth/auth.routes.ts",
+      "source_location": 7,
+      "weight": 1.0,
+      "source": "auth_routes_ts_auth_routes",
+      "target": "auth_controller_ts_register_handler"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/modules/auth/auth.routes.ts",
+      "source_location": 8,
+      "weight": 1.0,
+      "source": "auth_routes_ts_auth_routes",
+      "target": "auth_controller_ts_login_handler"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "server/src/shared/middleware/auth.middleware.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "auth_middleware_ts_auth_middleware",
+      "target": "auth_routes_ts_auth_routes"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/modules/auth/auth.types.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "auth_types_ts_auth_types",
+      "target": "auth_validation_schema_ts_auth_validation"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "server/src/shared/middleware/validator.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "validator_ts_validator_middleware",
+      "target": "auth_validation_schema_ts_auth_validation"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/src/modules/comment/comment.controller.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "comment_controller_ts_comment_controller",
+      "target": "comments_table_sql_comments_table"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/src/modules/comment/comment.routes.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "comment_routes_ts_comment_routes",
+      "target": "comments_table_sql_comments_table"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/src/modules/comment/comment.types.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "comment_types_ts_comment_types",
+      "target": "comments_table_sql_comments_table"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/src/modules/post/post.types.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "post_types_ts_post_types",
+      "target": "posts_table_sql_posts_table"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/src/modules/post/psot.controller.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "psot_controller_ts_post_controller",
+      "target": "posts_table_sql_posts_table"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/src/modules/post/post.routes.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "post_routes_ts_post_routes",
+      "target": "posts_table_sql_posts_table"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/modules/auth/auth.controller.ts",
+      "source_location": 9,
+      "weight": 1.0,
+      "source": "auth_controller_ts_register_handler",
+      "target": "db_ts_database_pool"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/modules/auth/auth.controller.ts",
+      "source_location": 34,
+      "weight": 1.0,
+      "source": "auth_controller_ts_login_handler",
+      "target": "db_ts_database_pool"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/config/db.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "db_ts_database_pool",
+      "target": "env_ts_env_config"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/config/env.ts",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "env_ts_env_config",
+      "target": "env_types_ts_env_types"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/shared/database-table/posts-table.sql",
+      "source_location": 3,
+      "weight": 1.0,
+      "source": "posts_table_sql_posts_table",
+      "target": "users_table_sql_users_table"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/shared/database-table/comments-table.sql",
+      "source_location": 3,
+      "weight": 1.0,
+      "source": "comments_table_sql_comments_table",
+      "target": "users_table_sql_users_table"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/shared/database-table/likes-table.sql",
+      "source_location": 3,
+      "weight": 1.0,
+      "source": "likes_table_sql_likes_table",
+      "target": "users_table_sql_users_table"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/shared/database-table/comments-table.sql",
+      "source_location": 4,
+      "weight": 1.0,
+      "source": "comments_table_sql_comments_table",
+      "target": "posts_table_sql_posts_table"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/shared/database-table/likes-table.sql",
+      "source_location": 4,
+      "weight": 1.0,
+      "source": "likes_table_sql_likes_table",
+      "target": "posts_table_sql_posts_table"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/modules/auth/auth.controller.ts",
+      "source_location": 6,
+      "weight": 1.0,
+      "source": "auth_controller_ts_register_handler",
+      "target": "auth_types_ts_register_body"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/modules/auth/auth.controller.ts",
+      "source_location": 31,
+      "weight": 1.0,
+      "source": "auth_controller_ts_login_handler",
+      "target": "auth_types_ts_login_body"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/modules/auth/auth.controller.ts",
+      "source_location": 34,
+      "weight": 1.0,
+      "source": "auth_controller_ts_login_handler",
+      "target": "auth_types_ts_user_row"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/modules/auth/auth.types.ts",
+      "source_location": 4,
+      "weight": 1.0,
+      "source": "auth_types_ts_register_body",
+      "target": "auth_validation_schema_ts_register_schema"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/modules/auth/auth.types.ts",
+      "source_location": 5,
+      "weight": 1.0,
+      "source": "auth_types_ts_login_body",
+      "target": "auth_validation_schema_ts_login_schema"
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "auth_module_components",
+      "label": "Authentication Module Components",
+      "nodes": [
+        "auth_controller_ts_auth_controller",
+        "auth_routes_ts_auth_routes",
+        "auth_types_ts_auth_types",
+        "auth_validation_schema_ts_auth_validation"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/modules/auth"
+    },
+    {
+      "id": "database_schema_tables",
+      "label": "Database Schema Tables",
+      "nodes": [
+        "users_table_sql_users_table",
+        "posts_table_sql_posts_table",
+        "comments_table_sql_comments_table",
+        "likes_table_sql_likes_table"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/shared/database-table"
+    },
+    {
+      "id": "post_module_scaffolds",
+      "label": "Post Module Scaffolds",
+      "nodes": [
+        "post_types_ts_post_types",
+        "psot_controller_ts_post_controller",
+        "post_routes_ts_post_routes"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "server/src/modules/post"
+    },
+    {
+      "id": "comment_module_scaffolds",
+      "label": "Comment Module Scaffolds",
+      "nodes": [
+        "comment_controller_ts_comment_controller",
+        "comment_routes_ts_comment_routes",
+        "comment_types_ts_comment_types"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "server/src/modules/comment"
+    },
+    {
+      "id": "server_startup_chain",
+      "label": "Server Startup Chain",
+      "nodes": [
+        "index_ts_server_entry",
+        "app_ts_express_app",
+        "db_ts_database_pool",
+        "env_ts_env_config"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src"
+    }
+  ],
+  "built_at_commit": "48a35fe517c54c3e0ebb40a832ffef796e401775"
+}

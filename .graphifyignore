@@ -1,0 +1,32 @@
+# Git internals
+.git/
+
+# Dependencies
+**/node_modules/
+
+# Build outputs
+**/dist/
+**/build/
+**/out/
+
+# Graphify's own output
+graphify-out/
+
+# Agent metadata
+.agents/
+
+# Environment/secrets
+**/.env
+**/.env.*
+**/setting.local.json
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

@@ -33,7 +33,8 @@ Everything agents needs to work on writespace lives here, plus `AGENTS.md` at th
 ├── sessions/                ← task handoff between agent sessions
 ├── runbooks/                ← deploy, rollback, incident, feature flags
 ├── taskboard/               ← live GitLab board mirror (not configured)
-├── skills/                  ← 7 skills, each with .skill + SKILL.md
+├── skills/                  ← 8 skills, each with .skill + SKILL.md
+├── issues/                  ← structured issues parsed from requirements
 └── raw/                     ← immutable source documents for wiki ingestion
 ```
 

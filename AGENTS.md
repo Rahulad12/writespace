@@ -101,6 +101,7 @@ cd server && npm run test
 
 | Skill | Invoke | Purpose |
 |---|---|---|
+| issues | `/issues <path | text>` | Parse raw requirements into structured issues |
 | taskboard | `/taskboard [sync\|new <title>\|move #<iid> <col>]` | GitLab board management (not configured) |
 | prompt | `/prompt <draft>` | Enhance and refine prompts |
 | scaffold | `/scaffold <feature> <client|server>` | Generate module boilerplate |
