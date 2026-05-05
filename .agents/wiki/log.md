@@ -37,7 +37,18 @@
 - **Completed**: Issue #12 — Create JWT authentication middleware and route guards
   - Already existed: `authenticateToken` and `optionalAuth` middleware with 7 tests
   - Covers: valid token, missing token, expired token, invalid token, optional pass-through
-  - Ready to be applied to protected routes as they are built
+  - Applied to auth routes, ready for other protected routes
+- **Completed**: Issue #13 — Implement blog CRUD API endpoints
+  - Created blog module following module-structure.md conventions
+  - Created `blog.types.ts` — Zod schemas (createBlogSchema, updateBlogSchema), DTOs, BlogRow and BlogWithAuthor interfaces
+  - Created `blog.service.ts` — business logic with DB calls (createBlog, getBlogs, getBlogById, updateBlog, deleteBlog)
+  - Created `blog.controller.ts` — request parsing with proper error handling and auth checks
+  - Created `blog.routes.ts` — routes with authenticateToken middleware on protected endpoints
+  - Registered routes in `app.ts` at `/api/blogs`
+  - Created `blog.service.test.ts` — 14 tests for service layer
+  - Created `blog.controller.test.ts` — 10 tests for controller layer
+  - All 24 tests pass, build succeeds
+  - Endpoints: POST /api/blogs (auth), GET /api/blogs (public), GET /api/blogs/:id (public), PUT /api/blogs/:id (auth), DELETE /api/blogs/:id (auth)
 - **Ran**: context-sync — updated `.agents/context/` files
 
 ## 2026-05-04

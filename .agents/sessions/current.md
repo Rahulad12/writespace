@@ -2,7 +2,7 @@
 ready-for-next-task
 
 ## Active task
-None — issues #10, #11, #12 completed and closed.
+None — issues #10, #11, #12, #13 completed and closed.
 
 ## What was done this session
 - Initialized full AI-native SDLC agent setup via `agents.setup.md`
@@ -20,10 +20,18 @@ None — issues #10, #11, #12 completed and closed.
   - 15 tests pass, manual API testing verified all status codes
 - **Completed**: Issue #12 — Create JWT authentication middleware and route guards
   - Already existed with full test coverage (7 tests for authenticateToken + optionalAuth)
-  - Ready to be applied to protected routes
+  - Applied to auth routes and ready for protected routes
+- **Completed**: Issue #13 — Implement blog CRUD API endpoints
+  - Created blog module following module-structure.md (types, service, controller, routes)
+  - Created blog.types.ts with Zod schemas for create/update validation
+  - Created blog.service.ts with business logic (create, read, update, delete)
+  - Created blog.controller.ts with proper request parsing and error handling
+  - Created blog.routes.ts with auth middleware on protected endpoints
+  - Registered blog routes in app.ts at `/api/blogs`
+  - Created comprehensive tests: 24 tests pass (14 service + 10 controller tests)
+  - Build succeeds, all endpoints return proper status codes
 
 ## What is next
-- Issue #13 — Implement blog CRUD API endpoints (next logical step, all dependencies met)
 - Issue #14 — Implement draft management API
 - Issue #16 — Implement follow/unfollow API endpoints
 - Issue #15 — Implement bookmark API endpoints
@@ -33,11 +41,13 @@ None — issues #10, #11, #12 completed and closed.
 - None currently
 
 ## Files touched (new additions)
-- server/src/shared/middleware/validator.ts (created — Zod validation middleware)
-- server/src/modules/auth/auth.validation.schema.ts (updated — stronger password rules, identifier field)
-- server/src/modules/auth/auth.routes.ts (updated — wired validation middleware)
-- server/src/modules/auth/auth.controller.ts (updated — login by email or username)
-- server/src/modules/auth/auth.controller.test.ts (updated — identifier field, username login test)
+- server/src/modules/blog/blog.types.ts (created — Zod schemas, DTOs, interfaces)
+- server/src/modules/blog/blog.service.ts (created — business logic and DB calls)
+- server/src/modules/blog/blog.controller.ts (created — request parsing, response handling)
+- server/src/modules/blog/blog.routes.ts (created — routes with auth middleware)
+- server/src/modules/blog/blog.service.test.ts (created — 14 service tests)
+- server/src/modules/blog/blog.controller.test.ts (created — 10 controller tests)
+- server/src/app.ts (updated — registered blog routes)
 
 ## Notes
-Auth layer is complete: registration, login (email/username), JWT generation, JWT validation middleware, and optional auth. Blog CRUD is the next logical step.
+Blog CRUD API is complete: create (POST /api/blogs), read all (GET /api/blogs), read one (GET /api/blogs/:id), update (PUT /api/blogs/:id), delete (DELETE /api/blogs/:id). All protected endpoints require JWT authentication. Draft management (Issue #14) is the next logical step.
