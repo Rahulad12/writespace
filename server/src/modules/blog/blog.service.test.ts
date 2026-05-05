@@ -103,16 +103,19 @@ describe("blog.service", () => {
   });
 
   describe("getBlogs", () => {
-    it("should return all blogs with default pagination", async () => {
+    it("should return only published blogs by default", async () => {
       const mockBlogs = [
-        { id: 1, title: "Blog 1" },
-        { id: 2, title: "Blog 2" },
+        { id: 1, title: "Blog 1", status: "published" },
+        { id: 2, title: "Blog 2", status: "published" },
       ];
       (pool.query as jest.Mock).mockResolvedValue({ rows: mockBlogs });
 
       const result = await blogService.getBlogs();
 
-      expect(pool.query).toHaveBeenCalled();
+      expect(pool.query).toHaveBeenCalledWith(
+        expect.stringContaining("AND b.status = 'published'"),
+        expect.arrayContaining([10, 0])
+      );
       expect(result).toEqual(mockBlogs);
     });
 
@@ -126,6 +129,88 @@ describe("blog.service", () => {
         expect.stringContaining("AND b.author_id = $1"),
         expect.arrayContaining([1, "published"])
       );
+    });
+
+    it("should allow fetching drafts when explicitly requested", async () => {
+      const mockBlogs = [{ id: 1, title: "Draft Blog", status: "draft" }];
+      (pool.query as jest.Mock).mockResolvedValue({ rows: mockBlogs });
+
+      await blogService.getBlogs({ status: "draft" });
+
+      expect(pool.query).toHaveBeenCalledWith(
+        expect.stringContaining("AND b.status = $1"),
+        expect.arrayContaining(["draft"])
+      );
+    });
+  });
+
+  describe("getMyDrafts", () => {
+    it("should return only drafts for the specified author", async () => {
+      const mockDrafts = [
+        { id: 1, title: "Draft 1", status: "draft", author_id: 1 },
+        { id: 2, title: "Draft 2", status: "draft", author_id: 1 },
+      ];
+      (pool.query as jest.Mock).mockResolvedValue({ rows: mockDrafts });
+
+      const result = await blogService.getMyDrafts(1);
+
+      expect(pool.query).toHaveBeenCalledWith(
+        expect.stringContaining("SELECT * FROM blogs"),
+        [1]
+      );
+      expect(result).toEqual(mockDrafts);
+      expect(result.every((blog) => blog.status === "draft")).toBe(true);
+    });
+
+    it("should return empty array when no drafts exist", async () => {
+      (pool.query as jest.Mock).mockResolvedValue({ rows: [] });
+
+      const result = await blogService.getMyDrafts(1);
+
+      expect(result).toEqual([]);
+    });
+  });
+
+  describe("publishDraft", () => {
+    it("should publish a draft and set published_at", async () => {
+      const draftBlog = {
+        id: 1,
+        author_id: 1,
+        title: "Draft",
+        content: "Content",
+        status: "draft",
+        created_at: new Date(),
+        updated_at: new Date(),
+        published_at: null,
+      };
+      const publishedBlog = { ...draftBlog, status: "published", published_at: new Date() };
+      (pool.query as jest.Mock)
+        .mockResolvedValueOnce({ rows: [draftBlog] })
+        .mockResolvedValueOnce({ rows: [publishedBlog] });
+
+      const result = await blogService.publishDraft(1, 1);
+
+      expect(result?.status).toBe("published");
+      expect(pool.query).toHaveBeenCalledWith(
+        expect.stringContaining("UPDATE blogs"),
+        [1, 1]
+      );
+    });
+
+    it("should return null when draft not found or unauthorized", async () => {
+      (pool.query as jest.Mock).mockResolvedValue({ rows: [] });
+
+      const result = await blogService.publishDraft(999, 1);
+
+      expect(result).toBeNull();
+    });
+
+    it("should not publish someone else's draft", async () => {
+      (pool.query as jest.Mock).mockResolvedValue({ rows: [] });
+
+      const result = await blogService.publishDraft(1, 2); // Different user
+
+      expect(result).toBeNull();
     });
   });
 

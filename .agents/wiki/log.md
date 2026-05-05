@@ -49,6 +49,15 @@
   - Created `blog.controller.test.ts` — 10 tests for controller layer
   - All 24 tests pass, build succeeds
   - Endpoints: POST /api/blogs (auth), GET /api/blogs (public), GET /api/blogs/:id (public), PUT /api/blogs/:id (auth), DELETE /api/blogs/:id (auth)
+- **Completed**: Issue #14 — Implement draft management API
+  - Public blog feed (`GET /api/blogs`) now filters out drafts by default (only shows `published` blogs)
+  - Added `GET /api/blogs/drafts` endpoint (auth required) — returns only current user's drafts
+  - Added `PUT /api/blogs/:id/publish` endpoint (auth required) — changes draft status to published, sets `published_at`
+  - Updated `getBlogById` to return 404 for drafts when requested by non-authors (draft privacy)
+  - Added `getMyDrafts` and `publishDraft` service functions
+  - Added 13 new tests for draft management (6 service + 7 controller tests)
+  - Total blog tests: 37 tests pass, build succeeds
+  - Draft privacy verified: other users and guests cannot view drafts
 - **Ran**: context-sync — updated `.agents/context/` files
 
 ## 2026-05-04

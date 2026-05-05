@@ -54,6 +54,9 @@ export const getBlogs = async (options?: {
   if (status) {
     params.push(status);
     query += ` AND b.status = $${params.length}`;
+  } else {
+    // By default, only show published blogs in public feed
+    query += ` AND b.status = 'published'`;
   }
 
   query += ` ORDER BY b.created_at DESC`;
@@ -62,6 +65,38 @@ export const getBlogs = async (options?: {
 
   const result = await pool.query<BlogWithAuthor>(query, params);
   return result.rows;
+};
+
+export const getMyDrafts = async (authorId: number): Promise<BlogRow[]> => {
+  const result = await pool.query<BlogRow>(
+    `SELECT * FROM blogs
+     WHERE author_id = $1 AND status = 'draft'
+     ORDER BY created_at DESC`,
+    [authorId]
+  );
+
+  return result.rows;
+};
+
+export const publishDraft = async (id: number, authorId: number): Promise<BlogRow | null> => {
+  const existing = await pool.query<BlogRow>(
+    "SELECT * FROM blogs WHERE id = $1 AND author_id = $2",
+    [id, authorId]
+  );
+
+  if (existing.rows.length === 0) {
+    return null;
+  }
+
+  const result = await pool.query<BlogRow>(
+    `UPDATE blogs
+     SET status = 'published', published_at = NOW(), updated_at = NOW()
+     WHERE id = $1 AND author_id = $2
+     RETURNING *`,
+    [id, authorId]
+  );
+
+  return result.rows[0] || null;
 };
 
 export const updateBlog = async (

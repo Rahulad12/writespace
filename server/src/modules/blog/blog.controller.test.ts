@@ -3,7 +3,9 @@ import * as blogService from "./blog.service";
 import {
   createBlog,
   getBlogs,
+  getMyDrafts,
   getBlogById,
+  publishDraft,
   updateBlog,
   deleteBlog,
 } from "./blog.controller";
@@ -102,9 +104,34 @@ describe("blog.controller", () => {
     });
   });
 
+  describe("getMyDrafts", () => {
+    it("should return 401 when not authenticated", async () => {
+      mockReq = { user: undefined };
+
+      await getMyDrafts(mockReq as Request, mockRes as Response);
+
+      expect(statusMock).toHaveBeenCalledWith(401);
+      expect(jsonMock).toHaveBeenCalledWith({ message: "Authentication required" });
+    });
+
+    it("should return drafts with 200", async () => {
+      const mockDrafts = [
+        { id: 1, title: "Draft 1", status: "draft" },
+        { id: 2, title: "Draft 2", status: "draft" },
+      ];
+      mockReq = { user: { id: 1, username: "test" } };
+      (blogService.getMyDrafts as jest.Mock).mockResolvedValue(mockDrafts);
+
+      await getMyDrafts(mockReq as Request, mockRes as Response);
+
+      expect(statusMock).toHaveBeenCalledWith(200);
+      expect(jsonMock).toHaveBeenCalledWith({ drafts: mockDrafts });
+    });
+  });
+
   describe("getBlogById", () => {
     it("should return 404 when blog not found", async () => {
-      mockReq = { params: { id: "999" } };
+      mockReq = { params: { id: "999" }, user: { id: 1, username: "test" } };
       (blogService.getBlogById as jest.Mock).mockResolvedValue(null);
 
       await getBlogById(mockReq as Request<{ id: string }>, mockRes as Response);
@@ -112,14 +139,81 @@ describe("blog.controller", () => {
       expect(statusMock).toHaveBeenCalledWith(404);
     });
 
-    it("should return blog when found", async () => {
-      const mockBlog = { id: 1, title: "Test Blog" };
-      mockReq = { params: { id: "1" } };
+    it("should return 404 when trying to view another user's draft", async () => {
+      const draftBlog = {
+        id: 1,
+        title: "Draft",
+        status: "draft",
+        author_id: 1,
+      };
+      mockReq = { params: { id: "1" }, user: { id: 2, username: "other" } }; // Different user
+      (blogService.getBlogById as jest.Mock).mockResolvedValue(draftBlog);
+
+      await getBlogById(mockReq as Request<{ id: string }>, mockRes as Response);
+
+      expect(statusMock).toHaveBeenCalledWith(404);
+    });
+
+    it("should return blog when found and authorized", async () => {
+      const mockBlog = { id: 1, title: "Test Blog", status: "published" };
+      mockReq = { params: { id: "1" }, user: { id: 1, username: "test" } };
       (blogService.getBlogById as jest.Mock).mockResolvedValue(mockBlog);
 
       await getBlogById(mockReq as Request<{ id: string }>, mockRes as Response);
 
       expect(jsonMock).toHaveBeenCalledWith({ blog: mockBlog });
+    });
+
+    it("should allow author to view their own draft", async () => {
+      const draftBlog = {
+        id: 1,
+        title: "My Draft",
+        status: "draft",
+        author_id: 1,
+      };
+      mockReq = { params: { id: "1" }, user: { id: 1, username: "test" } };
+      (blogService.getBlogById as jest.Mock).mockResolvedValue(draftBlog);
+
+      await getBlogById(mockReq as Request<{ id: string }>, mockRes as Response);
+
+      expect(jsonMock).toHaveBeenCalledWith({ blog: draftBlog });
+    });
+  });
+
+  describe("publishDraft", () => {
+    it("should return 401 when not authenticated", async () => {
+      mockReq = { user: undefined, params: { id: "1" } };
+
+      await publishDraft(mockReq as Request<{ id: string }>, mockRes as Response);
+
+      expect(statusMock).toHaveBeenCalledWith(401);
+    });
+
+    it("should return 404 when draft not found", async () => {
+      mockReq = { user: { id: 1, username: "test" }, params: { id: "999" } };
+      (blogService.publishDraft as jest.Mock).mockResolvedValue(null);
+
+      await publishDraft(mockReq as Request<{ id: string }>, mockRes as Response);
+
+      expect(statusMock).toHaveBeenCalledWith(404);
+    });
+
+    it("should publish draft and return 200", async () => {
+      const publishedBlog = {
+        id: 1,
+        title: "Published",
+        status: "published",
+      };
+      mockReq = { user: { id: 1, username: "test" }, params: { id: "1" } };
+      (blogService.publishDraft as jest.Mock).mockResolvedValue(publishedBlog);
+
+      await publishDraft(mockReq as Request<{ id: string }>, mockRes as Response);
+
+      expect(statusMock).toHaveBeenCalledWith(200);
+      expect(jsonMock).toHaveBeenCalledWith({
+        message: "Blog published successfully",
+        blog: publishedBlog,
+      });
     });
   });
 

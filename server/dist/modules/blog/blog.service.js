@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteBlog = exports.updateBlog = exports.getBlogs = exports.getBlogById = exports.createBlog = void 0;
+exports.deleteBlog = exports.updateBlog = exports.publishDraft = exports.getMyDrafts = exports.getBlogs = exports.getBlogById = exports.createBlog = void 0;
 const db_1 = require("../../config/db");
 const createBlog = async (authorId, data) => {
     const { title, content, status } = data;
@@ -36,6 +36,10 @@ const getBlogs = async (options) => {
         params.push(status);
         query += ` AND b.status = $${params.length}`;
     }
+    else {
+        // By default, only show published blogs in public feed
+        query += ` AND b.status = 'published'`;
+    }
     query += ` ORDER BY b.created_at DESC`;
     query += ` LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
     params.push(limit, offset);
@@ -43,6 +47,25 @@ const getBlogs = async (options) => {
     return result.rows;
 };
 exports.getBlogs = getBlogs;
+const getMyDrafts = async (authorId) => {
+    const result = await db_1.pool.query(`SELECT * FROM blogs
+     WHERE author_id = $1 AND status = 'draft'
+     ORDER BY created_at DESC`, [authorId]);
+    return result.rows;
+};
+exports.getMyDrafts = getMyDrafts;
+const publishDraft = async (id, authorId) => {
+    const existing = await db_1.pool.query("SELECT * FROM blogs WHERE id = $1 AND author_id = $2", [id, authorId]);
+    if (existing.rows.length === 0) {
+        return null;
+    }
+    const result = await db_1.pool.query(`UPDATE blogs
+     SET status = 'published', published_at = NOW(), updated_at = NOW()
+     WHERE id = $1 AND author_id = $2
+     RETURNING *`, [id, authorId]);
+    return result.rows[0] || null;
+};
+exports.publishDraft = publishDraft;
 const updateBlog = async (id, authorId, data) => {
     const existing = await db_1.pool.query("SELECT * FROM blogs WHERE id = $1 AND author_id = $2", [id, authorId]);
     if (existing.rows.length === 0) {

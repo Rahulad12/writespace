@@ -2,7 +2,7 @@
 ready-for-next-task
 
 ## Active task
-None — issues #10, #11, #12, #13 completed and closed.
+None — issues #10, #11, #12, #13, #14 completed and closed.
 
 ## What was done this session
 - Initialized full AI-native SDLC agent setup via `agents.setup.md`
@@ -30,9 +30,15 @@ None — issues #10, #11, #12, #13 completed and closed.
   - Registered blog routes in app.ts at `/api/blogs`
   - Created comprehensive tests: 24 tests pass (14 service + 10 controller tests)
   - Build succeeds, all endpoints return proper status codes
+- **Completed**: Issue #14 — Implement draft management API
+  - Public blog feed now filters out drafts by default (only shows published)
+  - Added `GET /api/blogs/drafts` endpoint (auth required) to view own drafts
+  - Added `PUT /api/blogs/:id/publish` endpoint to publish a draft
+  - Updated `getBlogById` to prevent other users from viewing drafts (404)
+  - Added 13 new tests for draft management (6 service + 7 controller tests)
+  - Total blog tests now: 37 tests pass, build succeeds
 
 ## What is next
-- Issue #14 — Implement draft management API
 - Issue #16 — Implement follow/unfollow API endpoints
 - Issue #15 — Implement bookmark API endpoints
 - Issue #17 — Implement user profile API endpoints
@@ -45,9 +51,9 @@ None — issues #10, #11, #12, #13 completed and closed.
 - server/src/modules/blog/blog.service.ts (created — business logic and DB calls)
 - server/src/modules/blog/blog.controller.ts (created — request parsing, response handling)
 - server/src/modules/blog/blog.routes.ts (created — routes with auth middleware)
-- server/src/modules/blog/blog.service.test.ts (created — 14 service tests)
-- server/src/modules/blog/blog.controller.test.ts (created — 10 controller tests)
+- server/src/modules/blog/blog.service.test.ts (created — 20 service tests)
+- server/src/modules/blog/blog.controller.test.ts (created — 17 controller tests)
 - server/src/app.ts (updated — registered blog routes)
 
 ## Notes
-Blog CRUD API is complete: create (POST /api/blogs), read all (GET /api/blogs), read one (GET /api/blogs/:id), update (PUT /api/blogs/:id), delete (DELETE /api/blogs/:id). All protected endpoints require JWT authentication. Draft management (Issue #14) is the next logical step.
+Blog CRUD + Draft Management complete. Drafts are private (only author can view via /drafts or by ID). Public feed (/blogs) only shows published posts. Next: social features (follows, bookmarks) or user profiles.
