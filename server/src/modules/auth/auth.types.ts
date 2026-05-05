@@ -8,5 +8,5 @@ export interface UserRow {
     id: number;
     username: string;
     email: string;
-    password: string;
+    password_hash: string;
 }

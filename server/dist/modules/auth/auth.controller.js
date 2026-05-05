@@ -20,7 +20,7 @@ const register = async (req, res) => {
         }
         const hashedPassword = await bcryptjs_1.default.hash(password, 10);
         const result = await db_1.pool.query(`
-            INSERT INTO users (username, email, password)
+            INSERT INTO users (username, email, password_hash)
             VALUES ($1, $2, $3)
             RETURNING id, username, email
         `, [username, email, hashedPassword]);
@@ -39,14 +39,14 @@ const register = async (req, res) => {
 };
 exports.register = register;
 const login = async (req, res) => {
-    const { email, password } = req.body;
+    const { identifier, password } = req.body;
     try {
-        const existingUser = await db_1.pool.query(`SELECT * FROM users WHERE email = $1`, [email]);
+        const existingUser = await db_1.pool.query(`SELECT * FROM users WHERE email = $1 OR username = $1`, [identifier]);
         if (existingUser.rows.length === 0) {
             return res.status(401).json({ message: "Invalid credentials" });
         }
         const user = existingUser.rows[0];
-        const isPasswordValid = await bcryptjs_1.default.compare(password, user.password);
+        const isPasswordValid = await bcryptjs_1.default.compare(password, user.password_hash);
         if (!isPasswordValid) {
             return res.status(401).json({ message: "Invalid credentials" });
         }

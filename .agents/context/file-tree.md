@@ -1,8 +1,8 @@
-# File Tree
-
-Generated: 2026-05-04 18:09:45 UTC
+# file-tree.md
+# Generated: 2026-05-05 14:42:29 UTC
 
 ./AGENTS.md
+./.gitattributes
 ./.gitignore
 ./.graphifyignore
 ./graphify-out/cache/semantic/20fb3a2e1384313f391bf791219e7bb30e61a4b0f081bf6bed2b37c64b6e5200.json
@@ -26,9 +26,15 @@ Generated: 2026-05-04 18:09:45 UTC
 ./graphify-out/graph.json
 ./graphify-out/GRAPH_REPORT.md
 ./graphify-out/manifest.json
+./README.md
 ./server/.env
 ./server/.gitignore
 ./server/jest.config.js
+./server/migrations/001_create_users.ts
+./server/migrations/002_create_blogs.ts
+./server/migrations/003_create_bookmarks.ts
+./server/migrations/004_create_follows.ts
+./server/.node-pg-migrate.ts
 ./server/package.json
 ./server/package-lock.json
 ./server/src/app.ts
@@ -56,13 +62,15 @@ Generated: 2026-05-04 18:09:45 UTC
 ./server/src/modules/post/post.routes.ts
 ./server/src/modules/post/post.types.ts
 ./server/src/modules/post/psot.controller.ts
-./server/src/shared/database-table/comments-table.sql
-./server/src/shared/database-table/likes-table.sql
-./server/src/shared/database-table/posts-table.sql
-./server/src/shared/database-table/users-table.sql
 ./server/src/shared/middleware/auth.middleware.test.ts
 ./server/src/shared/middleware/auth.middleware.ts
 ./server/src/shared/middleware/validator.ts
 ./server/src/shared/types/env.types.ts
 ./server/src/shared/types/express.d.ts
 ./server/tsconfig.json
+./test/auth.md
+./test/blogs.md
+./test/bookmarks.md
+./test/drafts.md
+./test/follows.md
+./test/profiles.md
