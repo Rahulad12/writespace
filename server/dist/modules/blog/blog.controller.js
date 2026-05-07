@@ -58,7 +58,7 @@ const getBlogs = async (req, res) => {
     try {
         const { authorId, status, limit, offset } = req.query;
         const blogs = await blogService.getBlogs({
-            authorId: authorId ? parseInt(authorId) : undefined,
+            authorId: authorId,
             status: status,
             limit: limit ? parseInt(limit) : undefined,
             offset: offset ? parseInt(offset) : undefined,
@@ -89,7 +89,7 @@ const getMyDrafts = async (req, res) => {
 exports.getMyDrafts = getMyDrafts;
 const getBlogById = async (req, res) => {
     try {
-        const blogId = parseInt(req.params.id);
+        const blogId = req.params.id;
         const blog = await blogService.getBlogById(blogId);
         if (!blog) {
             res.status(404).json({ message: "Blog not found" });
@@ -118,7 +118,7 @@ const publishDraft = async (req, res) => {
             res.status(401).json({ message: "Authentication required" });
             return;
         }
-        const blogId = parseInt(req.params.id);
+        const blogId = req.params.id;
         const blog = await blogService.publishDraft(blogId, userId);
         if (!blog) {
             res.status(404).json({ message: "Draft not found or unauthorized" });
@@ -142,7 +142,7 @@ const updateBlog = async (req, res) => {
             res.status(401).json({ message: "Authentication required" });
             return;
         }
-        const blogId = parseInt(req.params.id);
+        const blogId = req.params.id;
         const blog = await blogService.updateBlog(blogId, userId, req.body);
         if (!blog) {
             res.status(404).json({ message: "Blog not found or unauthorized" });
@@ -166,7 +166,7 @@ const deleteBlog = async (req, res) => {
             res.status(401).json({ message: "Authentication required" });
             return;
         }
-        const blogId = parseInt(req.params.id);
+        const blogId = req.params.id;
         const deleted = await blogService.deleteBlog(blogId, userId);
         if (!deleted) {
             res.status(404).json({ message: "Blog not found or unauthorized" });

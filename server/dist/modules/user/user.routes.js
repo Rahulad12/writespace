@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const user_controller_1 = require("./user.controller");
+const follow_controller_1 = require("../follow/follow.controller");
+const validator_1 = require("../../shared/middleware/validator");
+const auth_middleware_1 = require("../../shared/middleware/auth.middleware");
+const user_types_1 = require("./user.types");
+const userRouter = (0, express_1.Router)();
+userRouter.get("/me", auth_middleware_1.authenticateToken, user_controller_1.getCurrentUserProfile);
+userRouter.put("/profile", auth_middleware_1.authenticateToken, (0, validator_1.validate)(user_types_1.updateProfileSchema), user_controller_1.updateUserProfile);
+userRouter.get("/:userId", user_controller_1.getUserProfile);
+userRouter.get("/:userId/followers", follow_controller_1.getFollowers);
+userRouter.get("/:userId/following", follow_controller_1.getFollowing);
+userRouter.get("/:userId/follow-status", auth_middleware_1.authenticateToken, follow_controller_1.getFollowStatus);
+exports.default = userRouter;

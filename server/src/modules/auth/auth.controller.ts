@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import { pool } from "../../config/db";
 import { env } from "../../config/env";
 
-const generateToken = (user: { id: number; username: string }): string => {
+const generateToken = (user: { id: string; username: string }): string => {
     return jwt.sign(
         { id: user.id, username: user.username },
         env.jwtSecret,
@@ -14,7 +14,7 @@ const generateToken = (user: { id: number; username: string }): string => {
 };
 
 export const register = async (req: Request<{}, {}, RegisterBody>, res: Response) => {
-    const { username, email, password } = req.body as RegisterBody;
+    const { username, email, password } = req.body;
     try {
         const existingUser = await pool.query(`SELECT * FROM users WHERE email = $1`, [email]);
         if (existingUser.rows.length > 0) {
@@ -43,11 +43,11 @@ export const register = async (req: Request<{}, {}, RegisterBody>, res: Response
 }
 
 export const login = async (req: Request<{}, {}, LoginBody>, res: Response) => {
-    const { identifier, password } = req.body as LoginBody;
+    const { email, password } = req.body;
     try {
         const existingUser = await pool.query<UserRow>(
-            `SELECT * FROM users WHERE email = $1 OR username = $1`,
-            [identifier]
+            `SELECT * FROM users WHERE email = $1`,
+            [email]
         );
         if (existingUser.rows.length === 0) {
             return res.status(401).json({ message: "Invalid credentials" });

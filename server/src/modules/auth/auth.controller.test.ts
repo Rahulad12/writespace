@@ -43,7 +43,7 @@ describe("auth.controller", () => {
             const registerBody = { username: "testuser", email: "test@example.com", password: "password123" };
             mockReq.body = registerBody;
 
-            const mockUserRow = { id: 1, username: "testuser", email: "test@example.com" };
+            const mockUserRow = { id: "1", username: "testuser", email: "test@example.com" };
             (pool.query as jest.Mock)
                 .mockResolvedValueOnce({ rows: [] }) // No existing user
                 .mockResolvedValueOnce({ rows: [mockUserRow] }); // Insert success
@@ -55,7 +55,7 @@ describe("auth.controller", () => {
             expect(statusMock).toHaveBeenCalledWith(201);
             expect(jsonMock).toHaveBeenCalledWith({
                 message: "User created successfully",
-                user: { id: 1, username: "testuser", email: "test@example.com" },
+                user: { id: "1", username: "testuser", email: "test@example.com" },
                 token: "mock-token"
             });
         });
@@ -64,7 +64,7 @@ describe("auth.controller", () => {
             const registerBody = { username: "testuser", email: "existing@example.com", password: "password123" };
             mockReq.body = registerBody;
 
-            (pool.query as jest.Mock).mockResolvedValue({ rows: [{ id: 1, email: "existing@example.com" }] });
+            (pool.query as jest.Mock).mockResolvedValue({ rows: [{ id: "1", email: "existing@example.com" }] });
 
             await register(mockReq as Request, mockRes as Response);
 
@@ -87,11 +87,11 @@ describe("auth.controller", () => {
 
     describe("login", () => {
         it("should return user and token when credentials are valid (email)", async () => {
-            const loginBody = { identifier: "test@example.com", password: "password123" };
+            const loginBody = { email: "test@example.com", password: "password123" };
             mockReq.body = loginBody;
 
             const mockUserRow = {
-                id: 1,
+                id: "1",
                 username: "testuser",
                 email: "test@example.com",
                 password_hash: "hashedPassword"
@@ -105,37 +105,13 @@ describe("auth.controller", () => {
             expect(statusMock).toHaveBeenCalledWith(200);
             expect(jsonMock).toHaveBeenCalledWith({
                 message: "Login successful",
-                user: { id: 1, username: "testuser", email: "test@example.com" },
-                token: "mock-token"
-            });
-        });
-
-        it("should return user and token when credentials are valid (username)", async () => {
-            const loginBody = { identifier: "testuser", password: "password123" };
-            mockReq.body = loginBody;
-
-            const mockUserRow = {
-                id: 1,
-                username: "testuser",
-                email: "test@example.com",
-                password_hash: "hashedPassword"
-            };
-            (pool.query as jest.Mock).mockResolvedValue({ rows: [mockUserRow] });
-            (bcrypt.compare as jest.Mock).mockResolvedValue(true);
-            (jwt.sign as jest.Mock).mockReturnValue("mock-token");
-
-            await login(mockReq as Request, mockRes as Response);
-
-            expect(statusMock).toHaveBeenCalledWith(200);
-            expect(jsonMock).toHaveBeenCalledWith({
-                message: "Login successful",
-                user: { id: 1, username: "testuser", email: "test@example.com" },
+                user: { id: "1", username: "testuser", email: "test@example.com" },
                 token: "mock-token"
             });
         });
 
         it("should return 401 when user does not exist", async () => {
-            const loginBody = { identifier: "nonexistent@example.com", password: "password123" };
+            const loginBody = { email: "nonexistent@example.com", password: "password123" };
             mockReq.body = loginBody;
 
             (pool.query as jest.Mock).mockResolvedValue({ rows: [] });
@@ -147,11 +123,11 @@ describe("auth.controller", () => {
         });
 
         it("should return 401 when password is invalid", async () => {
-            const loginBody = { identifier: "test@example.com", password: "wrongpassword" };
+            const loginBody = { email: "test@example.com", password: "wrongpassword" };
             mockReq.body = loginBody;
 
             const mockUserRow = {
-                id: 1,
+                id: "1",
                 username: "testuser",
                 email: "test@example.com",
                 password_hash: "hashedPassword"
@@ -166,7 +142,7 @@ describe("auth.controller", () => {
         });
 
         it("should return 500 when database query fails", async () => {
-            const loginBody = { identifier: "test@example.com", password: "password123" };
+            const loginBody = { email: "test@example.com", password: "password123" };
             mockReq.body = loginBody;
 
             (pool.query as jest.Mock).mockRejectedValue(new Error("DB error"));

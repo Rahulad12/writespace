@@ -1,7 +1,7 @@
 # Wiki Log
 
 **Summary**: Append-only record of all wiki operations.
-**Last updated**: 2026-05-05
+**Last updated**: 2026-05-06
 
 ---
 
@@ -59,6 +59,49 @@
   - Total blog tests: 37 tests pass, build succeeds
   - Draft privacy verified: other users and guests cannot view drafts
 - **Ran**: context-sync — updated `.agents/context/` files
+
+- **Completed**: Issue #15 — Implement bookmark API endpoints
+  - Created bookmark module following module-structure.md conventions
+  - Created `bookmark.types.ts` — BookmarkRow and BookmarkedBlog interfaces
+  - Created `bookmark.service.ts` — addBookmark (rejects drafts, 409 on duplicate), removeBookmark, getMyBookmarks (joins blog+user details), isBookmarked
+  - Created `bookmark.controller.ts` — POST/DELETE /:blogId, GET /, GET /:blogId/check with proper status codes (201, 204, 400, 401, 404, 409)
+  - Created `bookmark.routes.ts` — routes all behind authenticateToken
+  - Registered bookmark routes in `app.ts` at `/api/bookmarks`
+  - Added 14 new tests (10 service + 4 controller tests) — 74 total server tests pass, build succeeds
+
+## 2026-05-06
+
+- **Completed**: Issue #16 — Implement follow/unfollow API endpoints
+  - Created follow module following module-structure.md conventions
+  - Created `follow.types.ts` — FollowRow, FollowWithProfile interfaces
+  - Created `follow.service.ts` — followUser (self-follow check, user exists check, 409 on duplicate), unfollowUser, getFollowers, getFollowing, isFollowing
+  - Created `follow.controller.ts` — follow/unfollow actions + getFollowers, getFollowing, getFollowStatus
+  - Created `follow.routes.ts` — POST/DELETE /:userId (auth required)
+  - Created `follow-profile.routes.ts` — GET /:userId/followers, GET /:userId/following (public), GET /:userId/follow-status (auth)
+  - Registered routes in `app.ts` at `/api/follows` and `/api/users`
+  - Added 26 new tests (10 service + 16 controller) — 100 total server tests pass, build succeeds
+
+- **Completed**: Issue #17 — Implement user profile API endpoints
+  - Created user module following module-structure.md conventions
+  - Created `user.types.ts` — UserProfileResponse, UserProfileWithFollow, updateProfileSchema with Zod validation
+  - Created `user.service.ts` — getUserProfile (with optional is_following), getCurrentUserProfile, updateUserProfile (username uniqueness check)
+  - Created `user.controller.ts` — getUserProfile (public), getCurrentUserProfile (auth), updateUserProfile (auth + validation)
+  - Created `user.routes.ts` — GET /:userId (public), GET /me (auth), PUT /profile (auth + validation), plus followers/following/follow-status routes
+  - Consolidated userFollowRouter into userRouter for proper route ordering
+  - Registered routes in `app.ts` at `/api/users`
+  - Added 19 new tests (8 service + 11 controller) — 119 total server tests pass, build succeeds
+
+- **Completed**: Issue #18 — Build login and registration pages
+  - Initialized React + Vite + TypeScript client project with antd, zustand, react-router-dom, axios
+  - **Restructured client to follow module-structure.md** — replaced flat `pages/`, `components/`, `services/`, `store/` with `src/shared/` + `src/modules/` architecture
+  - Created `shared/config/apiClient.ts` — Axios HTTP client with JWT interceptor
+  - Created `shared/hooks/useAuth.ts` — Zustand auth state store (shared across modules)
+  - Created `shared/components/ProtectedRoute.tsx` — route guard
+  - Created `modules/auth/` — index.ts, page.tsx, types.ts, services/auth.service.ts, hooks/useAuthForm.ts, components/LoginForm.tsx, components/RegisterForm.tsx
+  - Created `modules/home/` — index.ts, page.tsx
+  - App.tsx imports only from module barrels — no deep imports into module internals
+  - Configured Vite dev proxy to `/api` → `localhost:5000`
+  - Build succeeds: tsc + vite build pass with zero errors
 
 ## 2026-05-04
 

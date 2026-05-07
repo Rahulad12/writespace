@@ -32,7 +32,7 @@ export const getBlogs = async (
     const { authorId, status, limit, offset } = req.query;
 
     const blogs = await blogService.getBlogs({
-      authorId: authorId ? parseInt(authorId as string) : undefined,
+      authorId: authorId as string | undefined,
       status: status as "draft" | "published" | undefined,
       limit: limit ? parseInt(limit as string) : undefined,
       offset: offset ? parseInt(offset as string) : undefined,
@@ -70,7 +70,7 @@ export const getBlogById = async (
   res: Response
 ): Promise<void> => {
   try {
-    const blogId = parseInt(req.params.id);
+    const blogId = req.params.id;
     const blog = await blogService.getBlogById(blogId);
 
     if (!blog) {
@@ -105,7 +105,7 @@ export const publishDraft = async (
       return;
     }
 
-    const blogId = parseInt(req.params.id);
+    const blogId = req.params.id;
     const blog = await blogService.publishDraft(blogId, userId);
 
     if (!blog) {
@@ -134,7 +134,7 @@ export const updateBlog = async (
       return;
     }
 
-    const blogId = parseInt(req.params.id);
+    const blogId = req.params.id;
     const blog = await blogService.updateBlog(blogId, userId, req.body);
 
     if (!blog) {
@@ -163,7 +163,7 @@ export const deleteBlog = async (
       return;
     }
 
-    const blogId = parseInt(req.params.id);
+    const blogId = req.params.id;
     const deleted = await blogService.deleteBlog(blogId, userId);
 
     if (!deleted) {

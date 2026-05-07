@@ -52,7 +52,9 @@
 *(none)*
 
 ## DONE
-*(none)*
+| # | GH | Title | Type | Priority | Complexity |
+|---|----|-------|------|----------|------------|
+| ISSUE-1 | [#10](https://github.com/Rahulad12/writespace/issues/10) | Define PostgreSQL schema and initial migrations | tech-debt | critical | M |
 
 ---
 
@@ -60,6 +62,6 @@
 
 | Status | Count |
 |--------|-------|
-| TODO | 18 |
+| TODO | 17 |
 | IN-PROGRESS | 0 |
-| DONE | 0 |
+| DONE | 1 |

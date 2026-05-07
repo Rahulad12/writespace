@@ -1,33 +1,56 @@
-# Graph Report - .  (2026-05-04)
+# Graph Report - writespace  (2026-05-07)
 
 ## Corpus Check
-- Corpus is ~1,341 words - fits in a single context window. You may not need a graph.
+- 73 files · ~16,278 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 41 nodes · 39 edges · 7 communities detected
-- Extraction: 72% EXTRACTED · 28% INFERRED · 0% AMBIGUOUS · INFERRED: 11 edges (avg confidence: 0.7)
+- 298 nodes · 381 edges · 56 communities (48 shown, 8 thin omitted)
+- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 12 edges (avg confidence: 0.71)
 - Token cost: 0 input · 0 output
 
+## Graph Freshness
+- Built from commit: `845a21c1`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
+
 ## Community Hubs (Navigation)
-- [[_COMMUNITY_Comments and Likes Module|Comments and Likes Module]]
-- [[_COMMUNITY_Authentication Module Core|Authentication Module Core]]
-- [[_COMMUNITY_App Configuration and Bootstrap|App Configuration and Bootstrap]]
-- [[_COMMUNITY_Auth Login Flow|Auth Login Flow]]
-- [[_COMMUNITY_Auth Registration Flow|Auth Registration Flow]]
-- [[_COMMUNITY_Post Types|Post Types]]
-- [[_COMMUNITY_Project Rules (AGENTS.md)|Project Rules (AGENTS.md)]]
+- [[_COMMUNITY_Community 0|Community 0]]
+- [[_COMMUNITY_Community 1|Community 1]]
+- [[_COMMUNITY_Community 2|Community 2]]
+- [[_COMMUNITY_Community 3|Community 3]]
+- [[_COMMUNITY_Community 5|Community 5]]
+- [[_COMMUNITY_Community 6|Community 6]]
+- [[_COMMUNITY_Community 7|Community 7]]
+- [[_COMMUNITY_Community 8|Community 8]]
+- [[_COMMUNITY_Community 9|Community 9]]
+- [[_COMMUNITY_Community 10|Community 10]]
+- [[_COMMUNITY_Community 11|Community 11]]
+- [[_COMMUNITY_Community 12|Community 12]]
+- [[_COMMUNITY_Community 13|Community 13]]
+- [[_COMMUNITY_Community 14|Community 14]]
+- [[_COMMUNITY_Community 15|Community 15]]
+- [[_COMMUNITY_Community 16|Community 16]]
+- [[_COMMUNITY_Community 17|Community 17]]
+- [[_COMMUNITY_Community 18|Community 18]]
+- [[_COMMUNITY_Community 19|Community 19]]
+- [[_COMMUNITY_Community 20|Community 20]]
+- [[_COMMUNITY_Community 36|Community 36]]
+- [[_COMMUNITY_Community 45|Community 45]]
+- [[_COMMUNITY_Community 48|Community 48]]
+- [[_COMMUNITY_Community 55|Community 55]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `Express Application Setup` - 6 edges
-2. `Posts Database Table` - 6 edges
-3. `Auth Controller` - 5 edges
-4. `Auth Routes` - 5 edges
-5. `Database Pool Configuration` - 5 edges
-6. `Comments Database Table` - 5 edges
-7. `Environment Configuration` - 4 edges
-8. `Users Database Table` - 4 edges
-9. `login Handler Function` - 4 edges
-10. `register Handler Function` - 3 edges
+1. `writespace` - 17 edges
+2. `writespace — Agents Instructions` - 11 edges
+3. `authenticateToken()` - 8 edges
+4. `validate()` - 7 edges
+5. `Installation` - 7 edges
+6. `Test Cases: Authentication & Registration` - 7 edges
+7. `Test Cases: Blog Management (CRUD)` - 7 edges
+8. `register()` - 6 edges
+9. `login()` - 6 edges
+10. `Test Cases: Follow System` - 6 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Express Application Setup` --conceptually_related_to--> `Comment Routes`  [INFERRED]
@@ -48,45 +71,91 @@
 - **Comment Module Scaffolds** — comment_controller_ts_comment_controller, comment_routes_ts_comment_routes, comment_types_ts_comment_types [INFERRED 0.90]
 - **Server Startup Chain** — index_ts_server_entry, app_ts_express_app, db_ts_database_pool, env_ts_env_config [EXTRACTED 1.00]
 
-## Communities (16 total, 2 thin omitted)
+## Communities (56 total, 8 thin omitted)
 
-### Community 0 - "Comments and Likes Module"
+### Community 0 - "Community 0"
+Cohesion: 0.15
+Nodes (12): followUser(), getFollowers(), getFollowing(), getFollowStatus(), unfollowUser(), authenticateToken(), optionalAuth(), getCurrentUserProfile() (+4 more)
+
+### Community 1 - "Community 1"
+Cohesion: 0.07
+Nodes (29): API Conventions, Authentication, Code Quality, code:block1 (writespace/), code:bash (cd server), code:bash (cd server), code:bash (cd client), code:block16 (├── routes.ts      ← Express route handlers) (+21 more)
+
+### Community 2 - "Community 2"
+Cohesion: 0.1
+Nodes (28): Express Application Setup, Auth Controller, login Handler Function, register Handler Function, Auth Middleware, Auth Routes, Auth Type Definitions, LoginBody Type (+20 more)
+
+### Community 3 - "Community 3"
+Cohesion: 0.12
+Nodes (4): LoginForm(), useAuthForm(), login(), register()
+
+### Community 5 - "Community 5"
+Cohesion: 0.12
+Nodes (16): Client, code:bash (# 1. Refresh codebase context), code:bash (cd client && npm run dev), code:bash (cd server && npm run dev), Critical Rules — NEVER Break, Dev Commands, Feature Workflow, Key Files (+8 more)
+
+### Community 6 - "Community 6"
+Cohesion: 0.12
+Nodes (16): Building for Production, code:bash (cd server), code:bash (cd server), code:bash (cd client), code:bash (git clone https://github.com/Rahulad12/writespace.git), code:bash (cd server), code:env (PORT=5000), code:bash (createdb writespace) (+8 more)
+
+### Community 7 - "Community 7"
 Cohesion: 0.24
-Nodes (10): Comment Controller, Comment Routes, Comment Type Definitions, Comments Database Table, Likes Database Table, Post Routes, Post Type Definitions, Posts Database Table (+2 more)
+Nodes (4): generateToken(), login(), register(), validate()
 
-### Community 1 - "Authentication Module Core"
-Cohesion: 0.4
-Nodes (6): Auth Controller, Auth Middleware, Auth Routes, Auth Type Definitions, Auth Validation Schemas, Validator Middleware
-
-### Community 2 - "App Configuration and Bootstrap"
-Cohesion: 0.6
-Nodes (5): Express Application Setup, Database Pool Configuration, Environment Configuration, Environment Variable Types, Server Entry Point
-
-### Community 3 - "Auth Login Flow"
+### Community 8 - "Community 8"
 Cohesion: 0.5
-Nodes (4): login Handler Function, LoginBody Type, UserRow Interface, loginSchema Zod Schema
+Nodes (7): createBlog(), deleteBlog(), getBlogById(), getBlogs(), getMyDrafts(), publishDraft(), updateBlog()
 
-### Community 5 - "Auth Registration Flow"
+### Community 9 - "Community 9"
+Cohesion: 0.39
+Nodes (7): createBlog(), deleteBlog(), getBlogById(), getBlogs(), getMyDrafts(), publishDraft(), updateBlog()
+
+### Community 10 - "Community 10"
+Cohesion: 0.25
+Nodes (7): TC-AUTH-01: Successful User Registration, TC-AUTH-02: Registration with Existing Email, TC-AUTH-03: Registration with Invalid Data, TC-AUTH-04: Successful User Login, TC-AUTH-05: Login with Invalid Credentials, TC-AUTH-06: Access Restricted Route Without Auth, Test Cases: Authentication & Registration
+
+### Community 11 - "Community 11"
+Cohesion: 0.25
+Nodes (7): TC-BLOG-01: Create a Published Blog, TC-BLOG-02: Create Blog with Missing Fields, TC-BLOG-03: Update Own Blog, TC-BLOG-04: Update Someone Else's Blog, TC-BLOG-05: Delete Own Blog, TC-BLOG-06: Public Access to Blogs, Test Cases: Blog Management (CRUD)
+
+### Community 12 - "Community 12"
 Cohesion: 0.67
-Nodes (3): register Handler Function, RegisterBody Type, registerSchema Zod Schema
+Nodes (4): addBookmark(), checkBookmark(), getMyBookmarks(), removeBookmark()
+
+### Community 13 - "Community 13"
+Cohesion: 0.29
+Nodes (6): TC-FOLLOW-01: Follow a User, TC-FOLLOW-02: Prevent Self-Follow, TC-FOLLOW-03: Unfollow a User, TC-FOLLOW-04: View Followers/Following, TC-FOLLOW-05: Duplicate Follow Prevention, Test Cases: Follow System
+
+### Community 14 - "Community 14"
+Cohesion: 0.29
+Nodes (6): TC-BOOK-01: Bookmark a Blog, TC-BOOK-02: Duplicate Bookmark Prevention, TC-BOOK-03: Remove a Bookmark, TC-BOOK-04: View Own Bookmarks, TC-BOOK-05: Bookmark Guest Access, Test Cases: Bookmark System
+
+### Community 15 - "Community 15"
+Cohesion: 0.33
+Nodes (5): TC-PROFILE-01: View Public Profile (Guest), TC-PROFILE-02: View Own Profile (Authenticated), TC-PROFILE-03: Update Own Profile, TC-PROFILE-04: Update Profile Validation, Test Cases: User Profile
+
+### Community 16 - "Community 16"
+Cohesion: 0.33
+Nodes (5): TC-DRAFT-01: Save Blog as Draft, TC-DRAFT-02: View Own Drafts, TC-DRAFT-03: Draft Privacy, TC-DRAFT-04: Publish a Draft, Test Cases: Draft System
 
 ## Knowledge Gaps
-- **11 isolated node(s):** `post.types.ts`, `Comment Controller`, `Comment Type Definitions`, `Post Type Definitions`, `Post Controller` (+6 more)
+- **87 isolated node(s):** `code:bash (# 1. Refresh codebase context)`, `Post-Task / End of Session — Mandatory Steps`, `Critical Rules — NEVER Break`, `code:bash (cd client && npm run dev)`, `code:bash (cd server && npm run dev)` (+82 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Auth Controller` connect `Authentication Module Core` to `Comments and Likes Module`, `App Configuration and Bootstrap`?**
-  _High betweenness centrality (0.168) - this node is a cross-community bridge._
-- **Why does `Database Pool Configuration` connect `App Configuration and Bootstrap` to `Authentication Module Core`, `Auth Login Flow`, `Auth Registration Flow`?**
-  _High betweenness centrality (0.125) - this node is a cross-community bridge._
-- **Why does `Express Application Setup` connect `App Configuration and Bootstrap` to `Comments and Likes Module`, `Authentication Module Core`?**
-  _High betweenness centrality (0.120) - this node is a cross-community bridge._
-- **Are the 2 inferred relationships involving `Express Application Setup` (e.g. with `Comment Routes` and `Post Routes`) actually correct?**
-  _`Express Application Setup` has 2 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 3 inferred relationships involving `Posts Database Table` (e.g. with `Post Type Definitions` and `Post Controller`) actually correct?**
-  _`Posts Database Table` has 3 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `post.types.ts`, `Comment Controller`, `Comment Type Definitions` to the rest of the system?**
-  _11 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `writespace` connect `Community 1` to `Community 6`?**
+  _High betweenness centrality (0.019) - this node is a cross-community bridge._
+- **Why does `Getting Started` connect `Community 6` to `Community 1`?**
+  _High betweenness centrality (0.012) - this node is a cross-community bridge._
+- **Why does `validate()` connect `Community 7` to `Community 8`, `Community 0`?**
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
+- **What connects `code:bash (# 1. Refresh codebase context)`, `Post-Task / End of Session — Mandatory Steps`, `Critical Rules — NEVER Break` to the rest of the system?**
+  _87 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `Community 1` be split into smaller, more focused modules?**
+  _Cohesion score 0.07 - nodes in this community are weakly interconnected._
+- **Should `Community 2` be split into smaller, more focused modules?**
+  _Cohesion score 0.1 - nodes in this community are weakly interconnected._
+- **Should `Community 3` be split into smaller, more focused modules?**
+  _Cohesion score 0.12 - nodes in this community are weakly interconnected._

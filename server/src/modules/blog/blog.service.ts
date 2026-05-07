@@ -2,7 +2,7 @@ import { pool } from "../../config/db";
 import { BlogRow, BlogWithAuthor, CreateBlogBody, UpdateBlogBody } from "./blog.types";
 
 export const createBlog = async (
-  authorId: number,
+  authorId: string,
   data: CreateBlogBody
 ): Promise<BlogRow> => {
   const { title, content, status } = data;
@@ -18,7 +18,7 @@ export const createBlog = async (
   return result.rows[0];
 };
 
-export const getBlogById = async (id: number): Promise<BlogWithAuthor | null> => {
+export const getBlogById = async (id: string): Promise<BlogWithAuthor | null> => {
   const result = await pool.query<BlogWithAuthor>(
     `SELECT b.*, u.username as author_username, u.email as author_email
      FROM blogs b
@@ -31,7 +31,7 @@ export const getBlogById = async (id: number): Promise<BlogWithAuthor | null> =>
 };
 
 export const getBlogs = async (options?: {
-  authorId?: number;
+  authorId?: string;
   status?: "draft" | "published";
   limit?: number;
   offset?: number;
@@ -67,7 +67,7 @@ export const getBlogs = async (options?: {
   return result.rows;
 };
 
-export const getMyDrafts = async (authorId: number): Promise<BlogRow[]> => {
+export const getMyDrafts = async (authorId: string): Promise<BlogRow[]> => {
   const result = await pool.query<BlogRow>(
     `SELECT * FROM blogs
      WHERE author_id = $1 AND status = 'draft'
@@ -78,7 +78,7 @@ export const getMyDrafts = async (authorId: number): Promise<BlogRow[]> => {
   return result.rows;
 };
 
-export const publishDraft = async (id: number, authorId: number): Promise<BlogRow | null> => {
+export const publishDraft = async (id: string, authorId: string): Promise<BlogRow | null> => {
   const existing = await pool.query<BlogRow>(
     "SELECT * FROM blogs WHERE id = $1 AND author_id = $2",
     [id, authorId]
@@ -100,8 +100,8 @@ export const publishDraft = async (id: number, authorId: number): Promise<BlogRo
 };
 
 export const updateBlog = async (
-  id: number,
-  authorId: number,
+  id: string,
+  authorId: string,
   data: UpdateBlogBody
 ): Promise<BlogRow | null> => {
   const existing = await pool.query<BlogRow>("SELECT * FROM blogs WHERE id = $1 AND author_id = $2", [id, authorId]);
@@ -150,7 +150,7 @@ export const updateBlog = async (
   return result.rows[0] || null;
 };
 
-export const deleteBlog = async (id: number, authorId: number): Promise<boolean> => {
+export const deleteBlog = async (id: string, authorId: string): Promise<boolean> => {
   const result = await pool.query(
     "DELETE FROM blogs WHERE id = $1 AND author_id = $2",
     [id, authorId]

@@ -2,9 +2,9 @@ import { MigrationBuilder } from 'node-pg-migrate';
 
 export const up = (pgm: MigrationBuilder): void => {
   pgm.createTable('follows', {
-    id: { type: 'serial', primaryKey: true },
-    follower_id: { type: 'integer', notNull: true, references: 'users', onDelete: 'CASCADE' },
-    following_id: { type: 'integer', notNull: true, references: 'users', onDelete: 'CASCADE' },
+    id: { type: 'uuid', primaryKey: true, default: pgm.func('gen_random_uuid()') },
+    follower_id: { type: 'uuid', notNull: true, references: 'users', onDelete: 'CASCADE' },
+    following_id: { type: 'uuid', notNull: true, references: 'users', onDelete: 'CASCADE' },
     created_at: { type: 'timestamp', default: pgm.func('NOW()') },
   });
 

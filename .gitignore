@@ -1,1 +1,3 @@
 .agents/issues
+.graphify-out
+client/node_modules
