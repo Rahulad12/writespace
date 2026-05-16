@@ -1,6 +1,0 @@
-name: adr
-version: "1.0"
-description: Create a new Architecture Decision Record or list existing ones
-entry: .agents/skills/adr/SKILL.md
-argument-hint: "[new <title> | list]"
-allowed-tools: [Read, Write, Bash]

@@ -1,6 +1,0 @@
-name: context-sync
-version: "1.0"
-description: Rebuild the live codebase map — file-tree.md, dependencies.md, symbols.md — so the agent has accurate project context
-entry: .agents/skills/context-sync/SKILL.md
-argument-hint: ""
-allowed-tools: [Bash, Write]

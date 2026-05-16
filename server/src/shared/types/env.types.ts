@@ -6,6 +6,7 @@ export interface EnvTypes {
   dbPassword: string;
   dbPort: string;
   jwtSecret: string;
+  jwtExpiresIn: string;
 }
 
 export interface GithubSettings {

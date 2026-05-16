@@ -1,6 +1,0 @@
-name: prompt
-version: "1.0"
-description: Enhance and refine any draft prompt, issue description, MR body, or agent instruction
-entry: .agents/skills/prompt/SKILL.md
-argument-hint: "<draft prompt or text to enhance>"
-allowed-tools: [Read, Write, Edit]

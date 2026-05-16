@@ -1,12 +1,12 @@
 import z from "zod";
 
 export const registerSchema = z.object({
-  username: z.string().min(3).max(50),
-  email: z.string().email(),
-  password: z.string().min(6),
+    username: z.string().min(3, "Username must be at least 3 characters").max(50, "Username cannot exceed 50 characters"),
+    email: z.string().email("Invalid email format"),
+    password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
 export const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6),
+    email: z.string().email("Invalid email format"),
+    password: z.string().min(1, "Password is required"),
 });

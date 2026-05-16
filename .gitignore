@@ -1,1 +1,5 @@
-.agents/issues
+.agents
+.docs
+.graphify
+.graphify-out
+.gitattributes

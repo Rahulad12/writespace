@@ -5,8 +5,11 @@ export type RegisterBody = z.infer<typeof registerSchema>;
 export type LoginBody = z.infer<typeof loginSchema>;
 
 export interface UserRow {
-    id: number;
+    id: string;
     username: string;
     email: string;
-    password: string;
+    password_hash: string;
+    bio?: string;
+    created_at?: Date;
+    updated_at?: Date;
 }

@@ -1,6 +1,0 @@
-name: test-gen
-version: "1.0"
-description: Generate a test file for a given source file, following testing.md conventions
-entry: .agents/skills/test-gen/SKILL.md
-argument-hint: "<path/to/source-file>"
-allowed-tools: [Read, Write, Bash]

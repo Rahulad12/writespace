@@ -1,6 +1,0 @@
-name: review
-version: "1.0"
-description: Pre-MR self-review — checks code quality, rule compliance, test coverage, and generates an MR description
-entry: .agents/skills/review/SKILL.md
-argument-hint: "[path to review, or blank for git diff]"
-allowed-tools: [Bash, Read]
