@@ -4,8 +4,8 @@ export const up = (pgm: MigrationBuilder): void => {
   pgm.createType('blog_status', ['draft', 'published']);
 
   pgm.createTable('blogs', {
-    id: { type: 'serial', primaryKey: true },
-    author_id: { type: 'integer', notNull: true, references: 'users', onDelete: 'CASCADE' },
+    id: { type: 'uuid', primaryKey: true, default: pgm.func('gen_random_uuid()') },
+    author_id: { type: 'uuid', notNull: true, references: 'users', onDelete: 'CASCADE' },
     title: { type: 'varchar(255)', notNull: true },
     content: { type: 'text', notNull: true },
     status: { type: 'blog_status', notNull: true, default: 'draft' },

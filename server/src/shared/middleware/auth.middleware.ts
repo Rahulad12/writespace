@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { env } from "../../config/env";
+import { DecodedUser } from "../types/express.d";
 
 export const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers["authorization"];
@@ -11,7 +12,7 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
     }
 
     try {
-        const decoded = jwt.verify(token, env.jwtSecret) as { id: number; username: string };
+        const decoded = jwt.verify(token, env.jwtSecret) as DecodedUser;
         req.user = decoded;
         next();
     } catch (error) {
@@ -31,7 +32,7 @@ export const optionalAuth = (req: Request, res: Response, next: NextFunction) =>
     }
 
     try {
-        const decoded = jwt.verify(token, env.jwtSecret) as { id: number; username: string };
+        const decoded = jwt.verify(token, env.jwtSecret) as DecodedUser;
         req.user = decoded;
     } catch {
         // Invalid token — proceed without user context

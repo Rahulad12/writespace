@@ -39,9 +39,9 @@ const register = async (req, res) => {
 };
 exports.register = register;
 const login = async (req, res) => {
-    const { identifier, password } = req.body;
+    const { email, password } = req.body;
     try {
-        const existingUser = await db_1.pool.query(`SELECT * FROM users WHERE email = $1 OR username = $1`, [identifier]);
+        const existingUser = await db_1.pool.query(`SELECT * FROM users WHERE email = $1`, [email]);
         if (existingUser.rows.length === 0) {
             return res.status(401).json({ message: "Invalid credentials" });
         }

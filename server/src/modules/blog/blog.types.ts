@@ -16,8 +16,8 @@ export type CreateBlogBody = z.infer<typeof createBlogSchema>;
 export type UpdateBlogBody = z.infer<typeof updateBlogSchema>;
 
 export interface BlogRow {
-  id: number;
-  author_id: number;
+  id: string;
+  author_id: string;
   title: string;
   content: string;
   status: "draft" | "published";

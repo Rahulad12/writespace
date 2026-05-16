@@ -2,9 +2,9 @@ import { MigrationBuilder } from 'node-pg-migrate';
 
 export const up = (pgm: MigrationBuilder): void => {
   pgm.createTable('bookmarks', {
-    id: { type: 'serial', primaryKey: true },
-    user_id: { type: 'integer', notNull: true, references: 'users', onDelete: 'CASCADE' },
-    blog_id: { type: 'integer', notNull: true, references: 'blogs', onDelete: 'CASCADE' },
+    id: { type: 'uuid', primaryKey: true, default: pgm.func('gen_random_uuid()') },
+    user_id: { type: 'uuid', notNull: true, references: 'users', onDelete: 'CASCADE' },
+    blog_id: { type: 'uuid', notNull: true, references: 'blogs', onDelete: 'CASCADE' },
     created_at: { type: 'timestamp', default: pgm.func('NOW()') },
   });
 
