@@ -1,6 +1,0 @@
-name: taskboard
-version: "1.0"
-description: View, sync, and manage the GitLab task board
-entry: .agents/skills/taskboard/SKILL.md
-argument-hint: "[sync | new <title> | move #<iid> <col>]"
-allowed-tools: [Bash, Read, Write, Edit]

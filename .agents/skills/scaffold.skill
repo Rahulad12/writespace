@@ -1,6 +1,0 @@
-name: scaffold
-version: "1.0"
-description: Generate module boilerplate for a new feature in the correct package, following module-structure.md exactly
-entry: .agents/skills/scaffold/SKILL.md
-argument-hint: "<module-name> <package: frontend|backend>"
-allowed-tools: [Bash, Read, Write]
