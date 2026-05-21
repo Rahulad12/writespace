@@ -2,6 +2,8 @@ import express from 'express';
 import { pool } from './config/db';
 import cors from 'cors';
 import { env } from './config/env';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './config/swagger';
 import authRouter from './modules/auth/auth.routes';
 import blogRouter from './modules/blog/blog.routes';
 import bookmarkRouter from './modules/bookmark/bookmark.routes';
@@ -20,6 +22,8 @@ pool.connect().then(() => {
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/api/auth', authRouter);
 app.use('/api/blogs', blogRouter);

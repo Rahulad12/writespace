@@ -1,5 +1,7 @@
 .agents
 .docs
 .graphify
-.graphify-out
+graphify-out
 .gitattributes
+AGENTS.md
+dist
