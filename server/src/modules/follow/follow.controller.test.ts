@@ -35,7 +35,7 @@ describe("follow.controller", () => {
 
     it("should follow user and return 201", async () => {
       const mockFollow = { id: "1", follower_id: "1", following_id: "2", created_at: new Date() };
-      mockReq = { user: { id: "1", name: "test" }, params: { userId: "2" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { userId: "2" } };
       (followService.followUser as jest.Mock).mockResolvedValue(mockFollow);
 
       await followUser(mockReq as Request<{ userId: string }>, mockRes as Response);
@@ -48,7 +48,7 @@ describe("follow.controller", () => {
     });
 
     it("should return 400 when trying to follow yourself", async () => {
-      mockReq = { user: { id: "1", name: "test" }, params: { userId: "1" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { userId: "1" } };
       (followService.followUser as jest.Mock).mockRejectedValue(
         new Error("Cannot follow yourself")
       );
@@ -60,7 +60,7 @@ describe("follow.controller", () => {
     });
 
     it("should return 404 when user to follow not found", async () => {
-      mockReq = { user: { id: "1", name: "test" }, params: { userId: "999" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { userId: "999" } };
       (followService.followUser as jest.Mock).mockRejectedValue(
         new Error("User not found")
       );
@@ -72,7 +72,7 @@ describe("follow.controller", () => {
     });
 
     it("should return 409 when already following", async () => {
-      mockReq = { user: { id: "1", name: "test" }, params: { userId: "2" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { userId: "2" } };
       (followService.followUser as jest.Mock).mockRejectedValue({ code: "23505" });
 
       await followUser(mockReq as Request<{ userId: string }>, mockRes as Response);
@@ -93,7 +93,7 @@ describe("follow.controller", () => {
     });
 
     it("should unfollow user and return 204", async () => {
-      mockReq = { user: { id: "1", name: "test" }, params: { userId: "2" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { userId: "2" } };
       (followService.unfollowUser as jest.Mock).mockResolvedValue(true);
 
       await unfollowUser(mockReq as Request<{ userId: string }>, mockRes as Response);
@@ -103,7 +103,7 @@ describe("follow.controller", () => {
     });
 
     it("should return 404 when follow relationship not found", async () => {
-      mockReq = { user: { id: "1", name: "test" }, params: { userId: "999" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { userId: "999" } };
       (followService.unfollowUser as jest.Mock).mockResolvedValue(false);
 
       await unfollowUser(mockReq as Request<{ userId: string }>, mockRes as Response);
@@ -116,7 +116,7 @@ describe("follow.controller", () => {
   describe("getFollowers", () => {
     it("should return followers with 200", async () => {
       const mockFollowers = [
-        { id: "1", user_id: "3", name: "alice", bio: "Alice bio" },
+        { id: "1", user_id: "3", username: "alice", bio: "Alice bio" },
       ];
       mockReq = { params: { userId: "2" } };
       (followService.getFollowers as jest.Mock).mockResolvedValue(mockFollowers);
@@ -141,8 +141,8 @@ describe("follow.controller", () => {
   describe("getFollowing", () => {
     it("should return following list with 200", async () => {
       const mockFollowing = [
-        { id: "1", user_id: "5", name: "charlie", bio: "Charlie bio" },
-        { id: "2", user_id: "6", name: "diana", bio: null },
+        { id: "1", user_id: "5", username: "charlie", bio: "Charlie bio" },
+        { id: "2", user_id: "6", username: "diana", bio: null },
       ];
       mockReq = { params: { userId: "1" } };
       (followService.getFollowing as jest.Mock).mockResolvedValue(mockFollowing);
@@ -175,7 +175,7 @@ describe("follow.controller", () => {
     });
 
     it("should return following true", async () => {
-      mockReq = { user: { id: "1", name: "test" }, params: { userId: "2" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { userId: "2" } };
       (followService.isFollowing as jest.Mock).mockResolvedValue(true);
 
       await getFollowStatus(mockReq as Request<{ userId: string }>, mockRes as Response);
@@ -185,7 +185,7 @@ describe("follow.controller", () => {
     });
 
     it("should return following false", async () => {
-      mockReq = { user: { id: "1", name: "test" }, params: { userId: "2" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { userId: "2" } };
       (followService.isFollowing as jest.Mock).mockResolvedValue(false);
 
       await getFollowStatus(mockReq as Request<{ userId: string }>, mockRes as Response);

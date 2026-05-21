@@ -25,7 +25,7 @@ describe("user.controller", () => {
     it("should return user profile with 200", async () => {
       const mockProfile = {
         id: "1",
-        name: "testuser",
+        username: "testuser",
         email: "test@example.com",
         bio: "Test bio",
         created_at: new Date(),
@@ -51,7 +51,7 @@ describe("user.controller", () => {
     });
 
     it("should pass requester id when authenticated", async () => {
-      mockReq = { params: { userId: "2" }, user: { id: "1", name: "requester" } };
+      mockReq = { params: { userId: "2" }, user: { id: "1", username: "requester" } };
       (userService.getUserProfile as jest.Mock).mockResolvedValue({ id: "2" });
 
       await getUserProfile(mockReq as Request<{ userId: string }>, mockRes as Response);
@@ -73,13 +73,13 @@ describe("user.controller", () => {
     it("should return current user profile", async () => {
       const mockProfile = {
         id: "1",
-        name: "testuser",
+        username: "testuser",
         email: "test@example.com",
         bio: "My bio",
         created_at: new Date(),
         published_blog_count: 3,
       };
-      mockReq = { user: { id: "1", name: "testuser" } };
+      mockReq = { user: { id: "1", username: "testuser" } };
       (userService.getCurrentUserProfile as jest.Mock).mockResolvedValue(mockProfile);
 
       await getCurrentUserProfile(mockReq as Request, mockRes as Response);
@@ -89,7 +89,7 @@ describe("user.controller", () => {
     });
 
     it("should return 404 when user not found", async () => {
-      mockReq = { user: { id: "999", name: "ghost" } };
+      mockReq = { user: { id: "999", username: "ghost" } };
       (userService.getCurrentUserProfile as jest.Mock).mockResolvedValue(null);
 
       await getCurrentUserProfile(mockReq as Request, mockRes as Response);
@@ -101,7 +101,7 @@ describe("user.controller", () => {
 
   describe("updateUserProfile", () => {
     it("should return 401 when not authenticated", async () => {
-      mockReq = { user: undefined, body: { name: "newname" } };
+      mockReq = { user: undefined, body: { username: "newname" } };
 
       await updateUserProfile(mockReq as Request<{}, {}, UpdateProfileBody>, mockRes as Response);
 
@@ -112,15 +112,15 @@ describe("user.controller", () => {
     it("should update profile and return 200", async () => {
       const mockProfile = {
         id: "1",
-        name: "newname",
+        username: "newname",
         email: "test@example.com",
         bio: "New bio",
         created_at: new Date(),
         published_blog_count: 3,
       };
       mockReq = {
-        user: { id: "1", name: "testuser" },
-        body: { name: "newname", bio: "New bio" },
+        user: { id: "1", username: "testuser" },
+        body: { username: "newname", bio: "New bio" },
       };
       (userService.updateUserProfile as jest.Mock).mockResolvedValue({
         success: true,
@@ -138,8 +138,8 @@ describe("user.controller", () => {
 
     it("should return 404 when user not found", async () => {
       mockReq = {
-        user: { id: "999", name: "ghost" },
-        body: { name: "newname" },
+        user: { id: "999", username: "ghost" },
+        body: { username: "newname" },
       };
       (userService.updateUserProfile as jest.Mock).mockResolvedValue({
         success: false,

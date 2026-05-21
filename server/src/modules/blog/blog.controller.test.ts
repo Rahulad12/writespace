@@ -51,7 +51,7 @@ describe("blog.controller", () => {
         status: "draft",
       };
       mockReq = {
-        user: { id: "1", name: "test" },
+        user: { id: "1", username: "test" },
         body: { title: "Test", content: "Content", status: "draft" },
       };
       (blogService.createBlog as jest.Mock).mockResolvedValue(mockBlog);
@@ -67,7 +67,7 @@ describe("blog.controller", () => {
 
     it("should return 500 on service error", async () => {
       mockReq = {
-        user: { id: "1", name: "test" },
+        user: { id: "1", username: "test" },
         body: { title: "Test", content: "Content" },
       };
       (blogService.createBlog as jest.Mock).mockRejectedValue(new Error("DB error"));
@@ -119,7 +119,7 @@ describe("blog.controller", () => {
         { id: "1", title: "Draft 1", status: "draft" },
         { id: "2", title: "Draft 2", status: "draft" },
       ];
-      mockReq = { user: { id: "1", name: "test" } };
+      mockReq = { user: { id: "1", username: "test" } };
       (blogService.getMyDrafts as jest.Mock).mockResolvedValue(mockDrafts);
 
       await getMyDrafts(mockReq as Request, mockRes as Response);
@@ -131,7 +131,7 @@ describe("blog.controller", () => {
 
   describe("getBlogById", () => {
     it("should return 404 when blog not found", async () => {
-      mockReq = { params: { id: "999" }, user: { id: "1", name: "test" } };
+      mockReq = { params: { id: "999" }, user: { id: "1", username: "test" } };
       (blogService.getBlogById as jest.Mock).mockResolvedValue(null);
 
       await getBlogById(mockReq as Request<{ id: string }>, mockRes as Response);
@@ -146,7 +146,7 @@ describe("blog.controller", () => {
         status: "draft",
         author_id: "1",
       };
-      mockReq = { params: { id: "1" }, user: { id: "2", name: "other" } }; // Different user
+      mockReq = { params: { id: "1" }, user: { id: "2", username: "other" } }; // Different user
       (blogService.getBlogById as jest.Mock).mockResolvedValue(draftBlog);
 
       await getBlogById(mockReq as Request<{ id: string }>, mockRes as Response);
@@ -156,7 +156,7 @@ describe("blog.controller", () => {
 
     it("should return blog when found and authorized", async () => {
       const mockBlog = { id: "1", title: "Test Blog", status: "published" };
-      mockReq = { params: { id: "1" }, user: { id: "1", name: "test" } };
+      mockReq = { params: { id: "1" }, user: { id: "1", username: "test" } };
       (blogService.getBlogById as jest.Mock).mockResolvedValue(mockBlog);
 
       await getBlogById(mockReq as Request<{ id: string }>, mockRes as Response);
@@ -171,7 +171,7 @@ describe("blog.controller", () => {
         status: "draft",
         author_id: "1",
       };
-      mockReq = { params: { id: "1" }, user: { id: "1", name: "test" } };
+      mockReq = { params: { id: "1" }, user: { id: "1", username: "test" } };
       (blogService.getBlogById as jest.Mock).mockResolvedValue(draftBlog);
 
       await getBlogById(mockReq as Request<{ id: string }>, mockRes as Response);
@@ -190,7 +190,7 @@ describe("blog.controller", () => {
     });
 
     it("should return 404 when draft not found", async () => {
-      mockReq = { user: { id: "1", name: "test" }, params: { id: "999" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { id: "999" } };
       (blogService.publishDraft as jest.Mock).mockResolvedValue(null);
 
       await publishDraft(mockReq as Request<{ id: string }>, mockRes as Response);
@@ -204,7 +204,7 @@ describe("blog.controller", () => {
         title: "Published",
         status: "published",
       };
-      mockReq = { user: { id: "1", name: "test" }, params: { id: "1" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { id: "1" } };
       (blogService.publishDraft as jest.Mock).mockResolvedValue(publishedBlog);
 
       await publishDraft(mockReq as Request<{ id: string }>, mockRes as Response);
@@ -232,7 +232,7 @@ describe("blog.controller", () => {
 
     it("should return 404 when blog not found", async () => {
       mockReq = {
-        user: { id: "1", name: "test" },
+        user: { id: "1", username: "test" },
         params: { id: "999" },
         body: { title: "Updated" },
       };
@@ -246,7 +246,7 @@ describe("blog.controller", () => {
     it("should update and return blog", async () => {
       const updatedBlog = { id: "1", title: "Updated" };
       mockReq = {
-        user: { id: "1", name: "test" },
+        user: { id: "1", username: "test" },
         params: { id: "1" },
         body: { title: "Updated" },
       };
@@ -272,7 +272,7 @@ describe("blog.controller", () => {
     });
 
     it("should return 404 when blog not found", async () => {
-      mockReq = { user: { id: "1", name: "test" }, params: { id: "999" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { id: "999" } };
       (blogService.deleteBlog as jest.Mock).mockResolvedValue(false);
 
       await deleteBlog(mockReq as Request<{ id: string }>, mockRes as Response);
@@ -281,7 +281,7 @@ describe("blog.controller", () => {
     });
 
     it("should delete and return success", async () => {
-      mockReq = { user: { id: "1", name: "test" }, params: { id: "1" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { id: "1" } };
       (blogService.deleteBlog as jest.Mock).mockResolvedValue(true);
 
       await deleteBlog(mockReq as Request<{ id: string }>, mockRes as Response);

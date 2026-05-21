@@ -17,7 +17,7 @@ describe("user.service", () => {
     it("should return user profile with published blog count", async () => {
       const mockUser = {
         id: "1",
-        name: "testuser",
+        username: "testuser",
         email: "test@example.com",
         bio: "Test bio",
         created_at: new Date(),
@@ -31,7 +31,7 @@ describe("user.service", () => {
 
       expect(result).not.toBeNull();
       expect(result).toHaveProperty("published_blog_count", 5);
-      expect(result).toHaveProperty("name", "testuser");
+      expect(result).toHaveProperty("username", "testuser");
     });
 
     it("should return null when user not found", async () => {
@@ -45,7 +45,7 @@ describe("user.service", () => {
     it("should include is_following when requester is different user", async () => {
       const mockUser = {
         id: "2",
-        name: "other",
+        username: "other",
         email: "other@example.com",
         bio: null,
         created_at: new Date(),
@@ -65,7 +65,7 @@ describe("user.service", () => {
     it("should not include is_following when viewing own profile", async () => {
       const mockUser = {
         id: "1",
-        name: "testuser",
+        username: "testuser",
         email: "test@example.com",
         bio: "My bio",
         created_at: new Date(),
@@ -86,7 +86,7 @@ describe("user.service", () => {
     it("should return current user profile", async () => {
       const mockUser = {
         id: "1",
-        name: "testuser",
+        username: "testuser",
         email: "test@example.com",
         bio: "My bio",
         created_at: new Date(),
@@ -99,7 +99,7 @@ describe("user.service", () => {
       const result = await userService.getCurrentUserProfile("1");
 
       expect(result).not.toBeNull();
-      expect(result).toHaveProperty("name", "testuser");
+      expect(result).toHaveProperty("username", "testuser");
       expect(result).toHaveProperty("published_blog_count", 2);
     });
 
@@ -113,10 +113,10 @@ describe("user.service", () => {
   });
 
   describe("updateUserProfile", () => {
-    it("should update name and bio", async () => {
+    it("should update username and bio", async () => {
       const mockUser = {
         id: "1",
-        name: "newname",
+        username: "newname",
         email: "test@example.com",
         bio: "New bio",
         created_at: new Date(),
@@ -127,21 +127,21 @@ describe("user.service", () => {
         .mockResolvedValueOnce({ rows: [{ count: "1" }] });
 
       const updateData: UpdateProfileBody = {
-        name: "newname",
+        username: "newname",
         bio: "New bio",
       };
 
       const result = await userService.updateUserProfile("1", updateData);
 
       expect(result.success).toBe(true);
-      expect(result.profile).toHaveProperty("name", "newname");
+      expect(result.profile).toHaveProperty("username", "newname");
       expect(result.profile).toHaveProperty("bio", "New bio");
     });
 
     it("should return current profile when no updates provided", async () => {
       const mockUser = {
         id: "1",
-        name: "testuser",
+        username: "testuser",
         email: "test@example.com",
         bio: "Bio",
         created_at: new Date(),
@@ -154,7 +154,7 @@ describe("user.service", () => {
       const result = await userService.updateUserProfile("1", {});
 
       expect(result.success).toBe(true);
-      expect(result.profile).toHaveProperty("name", "testuser");
+      expect(result.profile).toHaveProperty("username", "testuser");
     });
   });
 });

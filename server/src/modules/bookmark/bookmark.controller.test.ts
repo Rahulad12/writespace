@@ -35,7 +35,7 @@ describe("bookmark.controller", () => {
 
     it("should create bookmark and return 201", async () => {
       const mockBookmark = { id: "1", user_id: "1", blog_id: "5", created_at: new Date() };
-      mockReq = { user: { id: "1", name: "test" }, params: { blogId: "5" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { blogId: "5" } };
       (bookmarkService.addBookmark as jest.Mock).mockResolvedValue(mockBookmark);
 
       await addBookmark(mockReq as Request<{ blogId: string }>, mockRes as Response);
@@ -48,7 +48,7 @@ describe("bookmark.controller", () => {
     });
 
     it("should return 400 when trying to bookmark a draft", async () => {
-      mockReq = { user: { id: "1", name: "test" }, params: { blogId: "5" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { blogId: "5" } };
       (bookmarkService.addBookmark as jest.Mock).mockRejectedValue(
         new Error("Cannot bookmark a draft blog")
       );
@@ -60,7 +60,7 @@ describe("bookmark.controller", () => {
     });
 
     it("should return 404 when blog not found", async () => {
-      mockReq = { user: { id: "1", name: "test" }, params: { blogId: "999" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { blogId: "999" } };
       (bookmarkService.addBookmark as jest.Mock).mockRejectedValue(
         new Error("Blog not found")
       );
@@ -72,7 +72,7 @@ describe("bookmark.controller", () => {
     });
 
     it("should return 409 when bookmark already exists", async () => {
-      mockReq = { user: { id: "1", name: "test" }, params: { blogId: "5" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { blogId: "5" } };
       (bookmarkService.addBookmark as jest.Mock).mockRejectedValue({ code: "23505" });
 
       await addBookmark(mockReq as Request<{ blogId: string }>, mockRes as Response);
@@ -93,7 +93,7 @@ describe("bookmark.controller", () => {
     });
 
     it("should remove bookmark and return 204", async () => {
-      mockReq = { user: { id: "1", name: "test" }, params: { blogId: "5" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { blogId: "5" } };
       (bookmarkService.removeBookmark as jest.Mock).mockResolvedValue(true);
 
       await removeBookmark(mockReq as Request<{ blogId: string }>, mockRes as Response);
@@ -103,7 +103,7 @@ describe("bookmark.controller", () => {
     });
 
     it("should return 404 when bookmark not found", async () => {
-      mockReq = { user: { id: "1", name: "test" }, params: { blogId: "999" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { blogId: "999" } };
       (bookmarkService.removeBookmark as jest.Mock).mockResolvedValue(false);
 
       await removeBookmark(mockReq as Request<{ blogId: string }>, mockRes as Response);
@@ -125,10 +125,10 @@ describe("bookmark.controller", () => {
 
     it("should return bookmarks with 200", async () => {
       const mockBookmarks = [
-        { id: "1", blog_id: "5", title: "Blog 1", author_name: "author1" },
-        { id: "2", blog_id: "7", title: "Blog 2", author_name: "author2" },
+        { id: "1", blog_id: "5", title: "Blog 1", author_username: "author1" },
+        { id: "2", blog_id: "7", title: "Blog 2", author_username: "author2" },
       ];
-      mockReq = { user: { id: "1", name: "test" } };
+      mockReq = { user: { id: "1", username: "test" } };
       (bookmarkService.getMyBookmarks as jest.Mock).mockResolvedValue(mockBookmarks);
 
       await getMyBookmarks(mockReq as Request, mockRes as Response);
@@ -149,7 +149,7 @@ describe("bookmark.controller", () => {
     });
 
     it("should return bookmarked true", async () => {
-      mockReq = { user: { id: "1", name: "test" }, params: { blogId: "5" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { blogId: "5" } };
       (bookmarkService.isBookmarked as jest.Mock).mockResolvedValue(true);
 
       await checkBookmark(mockReq as Request<{ blogId: string }>, mockRes as Response);
@@ -159,7 +159,7 @@ describe("bookmark.controller", () => {
     });
 
     it("should return bookmarked false", async () => {
-      mockReq = { user: { id: "1", name: "test" }, params: { blogId: "5" } };
+      mockReq = { user: { id: "1", username: "test" }, params: { blogId: "5" } };
       (bookmarkService.isBookmarked as jest.Mock).mockResolvedValue(false);
 
       await checkBookmark(mockReq as Request<{ blogId: string }>, mockRes as Response);
