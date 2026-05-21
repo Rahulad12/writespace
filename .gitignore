@@ -5,3 +5,6 @@ graphify-out
 .gitattributes
 AGENTS.md
 dist
+yarn.lock
+package-lock.json
+open-code-session.txt

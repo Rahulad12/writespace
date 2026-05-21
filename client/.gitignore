@@ -5,3 +5,5 @@ node_modules
 .env.test
 .env.production
 dist
+yarn.lock
+package-lock.json
