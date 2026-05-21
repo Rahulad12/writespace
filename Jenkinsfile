@@ -6,8 +6,8 @@ pipeline {
 
         stage('Clone') {
             steps {
-                git branch: 'develop',
-                url: 'YOUR_GITHUB_REPO'
+               git branch: params.BRANCH,
+               url: 'https://github.com/Rahulad12/writespace.git'
             }
         }
 
